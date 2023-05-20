@@ -1,16 +1,20 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import csv
+import Dataset32100260DTO as DatasetDTO
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def read_csv_file():
+    """
+    Read the dataset .csv file and parse the data into record objects of Dataset32100260DTO class.
+
+    Returns:
+        list: A list of Dataset32100260DTO objects parsed from the .csv file.
+    """
+    print(f"docstrings: \n{read_csv_file.__doc__}")
 
 
-# Press the green button in the gutter to run the script.
+def main():
+    read_csv_file()
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
