@@ -1,6 +1,15 @@
 import csv
 import Dataset32100260DTO as DatasetDTO
 
+# tabulate package is needed to print the table, if it's not available we print as plain text instead
+try:
+    from tabulate import tabulate
+
+    tabulate_available = True
+
+except ImportError:
+    tabulate_available = False
+
 
 def read_csv_file():
     """
@@ -26,7 +35,7 @@ def read_csv_file():
                 rows_counter += 1
                 record = DatasetDTO.DatasetS23(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8],
                                                row[9], row[10], row[11], row[12], row[13], row[14], row[15])
-                records.append(record)
+                records.append(record.to_list())
                 if rows_counter == 5:
                     break
 
@@ -47,12 +56,13 @@ def main():
     dataset = read_csv_file()
 
     record: DatasetDTO.DatasetS23
+
     print("printing the parsed records...")
 
-    print("REF_DATE","GEO","DGUID","Type of product","Type of storage","UOM","UOM_ID","SCALAR_FACTOR","SCALAR_ID","VECTOR","COORDINATE","VALUE","STATUS","SYMBOL","TERMINATED","DECIMALS")
+    header_row = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID", "SCALAR_FACTOR",
+                  "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
 
-    for record in dataset:
-        print(f"{record.to_list()}")
+    print(tabulate(dataset, headers=header_row, tablefmt="grid"))
 
 
 if __name__ == '__main__':
