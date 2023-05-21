@@ -1,4 +1,4 @@
-class Dataset32100260DTO:
+class DatasetS23:
     """A data transfer object for the dataset 32100260"""
     def __init__(self, ref_date, geo, dguid, type_of_product, type_of_storage, uom, uom_id, scalar_factor,
                  scalar_id, vector, coordinate, value, status, symbol, terminated, decimals):
