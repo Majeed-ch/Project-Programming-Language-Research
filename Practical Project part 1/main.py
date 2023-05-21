@@ -49,8 +49,10 @@ def main():
     record: DatasetDTO.DatasetS23
     print("printing the parsed records...")
 
+    print("REF_DATE","GEO","DGUID","Type of product","Type of storage","UOM","UOM_ID","SCALAR_FACTOR","SCALAR_ID","VECTOR","COORDINATE","VALUE","STATUS","SYMBOL","TERMINATED","DECIMALS")
+
     for record in dataset:
-        print(f"print record {record.ref_date}")
+        print(f"{record.to_list()}")
 
 
 if __name__ == '__main__':

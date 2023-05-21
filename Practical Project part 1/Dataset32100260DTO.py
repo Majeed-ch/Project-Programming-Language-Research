@@ -19,3 +19,11 @@ class DatasetS23:
         self.symbol = symbol
         self.terminated = terminated
         self.decimals = decimals
+
+    def to_list(self):
+        """Convert the object attributes to a list"""
+        return [
+            self.ref_date, self.geo, self.dguid, self.type_of_product, self.type_of_storage,
+            self.uom, self.uom_id, self.scalar_factor, self.scalar_id, self.vector,
+            self.coordinate, self.value, self.status, self.symbol, self.terminated, self.decimals
+        ]
