@@ -16,7 +16,7 @@ def read_csv_file():
     Read the dataset .csv file and parse the data into record objects of DatasetS23 class.
 
     Returns:
-        list: A list of Dataset32100260DTO objects parsed from the .csv file.
+        list: A list of lists that contains Dataset32100260DTO attributes parsed from the .csv file.
     """
     records = []
 
@@ -55,14 +55,22 @@ def main():
     # a list of records returned from reding the csv file
     dataset = read_csv_file()
 
-    record: DatasetDTO.DatasetS23
-
     print("printing the parsed records...")
 
     header_row = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID", "SCALAR_FACTOR",
                   "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
 
-    print(tabulate(dataset, headers=header_row, tablefmt="grid"))
+    if tabulate_available:
+        print(tabulate(dataset, headers=header_row, tablefmt="grid"))
+
+    else:
+        for column in header_row:
+            print(column, end=' | ')
+
+        for row in dataset:
+            print("")
+            for column in row:
+                print(column, end=' | ')
 
 
 if __name__ == '__main__':
