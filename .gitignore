@@ -3,4 +3,8 @@
 Practical Project part 1/.idea/workspace.xml
 Practical Project part 1/__pycache__/Dataset32100260DTO.cpython-310.pyc
 *.pyc
+__pycache__
 
+.idea
+.vscode
+venv
