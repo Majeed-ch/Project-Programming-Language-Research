@@ -1,14 +1,15 @@
-import csv
-
-
 class VegetablesRecord:
-    """A data transfer object for the dataset 32100260"""
+    """
+    A data transfer object for the dataset 32100260
+    """
+    last_id = 0
 
     def __init__(self, ref_date, geo, dguid, type_of_product, type_of_storage, uom, uom_id, scalar_factor,
                  scalar_id, vector, coordinate, value, status, symbol, terminated, decimals):
         """
         Initialize the object with the provided attribute values
         """
+        self.veg_id = self.generate_id()
         self.ref_date = ref_date
         self.geo = geo
         self.dguid = dguid
@@ -26,11 +27,18 @@ class VegetablesRecord:
         self.terminated = terminated
         self.decimals = decimals
 
+    def generate_id(self):
+        """
+        Generates an incremental id each time it's called
+        :return: incremental id integer
+        """
+        self.last_id += 1
+        return self.last_id
+
     def to_list(self):
         """
         Converts the object attributes to a list
-        :return:
-        List of attributes
+        :return: List of attributes
         """
         return [
             self.ref_date, self.geo, self.dguid, self.type_of_product, self.type_of_storage,
@@ -41,8 +49,7 @@ class VegetablesRecord:
     def __str__(self):
         """
         A string representative of the object
-        :return:
-        A string of attributes comma separated
+        :return: A string of attributes comma separated
         """
         return f"Record(ref_date={self.ref_date}, geo={self.geo}, dguid={self.dguid}, " \
                f"type_of_product={self.type_of_product}, type_of_storage={self.type_of_storage}, " \

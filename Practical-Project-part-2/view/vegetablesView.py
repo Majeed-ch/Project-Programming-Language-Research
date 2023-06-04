@@ -71,7 +71,7 @@ class VegetablesView:
         """
         pass
         # TODO: Get the id from the user, get the corresponding record from the controller, inputs from the user for
-        #  each record member then pass it to the controller to update the record in-memory.
+        #  each record member then pass the record to the controller to update the record in-memory.
 
     @staticmethod
     def delete_veg():
