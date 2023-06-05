@@ -1,9 +1,9 @@
 import csv
-from vegetablesRecord import VegetablesRecord
+from model.vegetablesRecord import VegetablesRecord
 
 
 class VegetablesServices:
-    def __int__(self, file_path: str):
+    def __init__(self, file_path: str):
         self.file_path = file_path
         self.records = []
         self.load_data()
@@ -15,7 +15,6 @@ class VegetablesServices:
         """
         self.records.clear()
 
-        print("loading records...")
         try:
             with open(self.file_path, 'r') as csv_file:
                 reader = csv.reader(csv_file)
@@ -71,7 +70,7 @@ class VegetablesServices:
         :param veg_id: the id of the requested record
         :return: VegetablesRecord object or None if not found
         """
-        return self.search_list(veg_id)
+        return self._search_list(veg_id)
 
     def add_vegetable(self, record):
         """
@@ -97,11 +96,11 @@ class VegetablesServices:
         :param veg_id: The id of the object that needs to be deleted
         :return:
         """
-        record = self.search_list(veg_id)
+        record = self._search_list(veg_id)
         if record is not None:
-            respond = input(f"are you sure you want to delete this record?(y/n)\n"
-                            f"{record.__str__()}")
-            if respond[0].lower() == 'y':
+            response = input(f"are you sure you want to delete this record?(y/n)\n"
+                             f"{record.__str__()}")
+            if response[0].lower() == 'y':
                 self.records.remove(record)
             else:
                 print('canceling deletion')
@@ -109,7 +108,7 @@ class VegetablesServices:
         else:
             print("There was an error deleting the record")
 
-    def search_list(self, veg_id):
+    def _search_list(self, veg_id):
         """
         Searches the list of records for the object with the id equals the passed id
         :param veg_id: the id of the requested record
