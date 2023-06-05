@@ -1,3 +1,6 @@
+from tabulate import tabulate
+
+
 class VegetablesView:
 
     @staticmethod
@@ -23,15 +26,27 @@ class VegetablesView:
         return input('Choose an option from the menu: ')
 
     @staticmethod
-    def list_all_veg(vegetables):
+    def list_all_veges(vegetables):
         """
         prints out on the console a list of the first 100 records in the dataset,
         and prints student name every 10 records
         :return:
         None
         """
-        pass
-        # TODO: print the passed list in a table (like in project 1).
+        #TODO: print the passed list in a table (like in project 1).
+        header_row = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
+                      "SCALAR_FACTOR",
+                      "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
+
+        print(tabulate(vegetables, headers=header_row, tablefmt="grid"))
+
+        # for column in header_row:
+        #     print(column, end=' | ')
+        #
+        # for row in vegetables:
+        #     print("")
+        #     for column in row:
+        #         print(column, end=' | ')
 
     @staticmethod
     def display_one_veg():

@@ -51,9 +51,10 @@ class VegetablesRecord:
         A string representative of the object
         :return: A string of attributes comma separated
         """
-        return f"Record(ref_date={self.ref_date}, geo={self.geo}, dguid={self.dguid}, " \
-               f"type_of_product={self.type_of_product}, type_of_storage={self.type_of_storage}, " \
-               f"uom={self.uom}, uom_id={self.uom_id}, scalar_factor={self.scalar_factor}, " \
-               f"scalar_id={self.scalar_id}, vector={self.vector}, coordinate={self.coordinate}, " \
-               f"value={self.value}, status={self.status}, symbol={self.symbol}, " \
-               f"terminated={self.terminated}, decimals={self.decimals})"
+        return f"ref_date: {self.ref_date}, geo: {self.geo}, dguid: {self.dguid}, " \
+               f"type_of_product: {self.type_of_product}, type_of_storage: {self.type_of_storage}, " \
+               f"uom: {self.uom}, uom_id: {self.uom_id}, scalar_factor: {self.scalar_factor}, " \
+               f"scalar_id: {self.scalar_id}, vector: {self.vector}, coordinate: {self.coordinate}, " \
+               f"value: {self.value}, status: {self.status}, symbol: {self.symbol}, " \
+               f"terminated: {self.terminated}, decimals: {self.decimals}"
+

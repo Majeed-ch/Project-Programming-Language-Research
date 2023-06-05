@@ -18,6 +18,10 @@ class VegetableController:
 
     def __init__(self, file_path: str):
         self.service = VegetablesServices(file_path)
+        if not self.service.load_data():
+            print("Exiting program")
+            sleep(2)
+            sys.exit()
 
     def start(self):
         """
@@ -26,14 +30,14 @@ class VegetableController:
         """
 
         while True:
-            os.system('clear')
+            # os.system('clear')
             View.display_author_name()
             View.display_menu()
 
             option = View.get_option_input()
 
             if option == self.__ALL_VEGETABLES:
-                print("Implement show all in controller.")
+                self.list_all_veges()
             elif option == self.__ONE_VEGETABLE:
                 print("Implement show one in controller.")
             elif option == self.__ADD_VEGETABLE:
@@ -51,4 +55,15 @@ class VegetableController:
                 sys.exit()
             else:
                 input("Please enter a correct option value.")
+
+    def list_all_veges(self):
+        """
+        Show all records to the user
+        :return:
+        """
+        vegetables = []
+        for record in self.service.records:
+            vegetables.append(record.to_list())
+
+        View.list_all_veges(vegetables)
 

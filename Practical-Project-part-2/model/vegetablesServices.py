@@ -6,12 +6,11 @@ class VegetablesServices:
     def __init__(self, file_path: str):
         self.file_path = file_path
         self.records = []
-        self.load_data()
 
     def load_data(self):
         """
         Loads the dataset to the memory from the csv file.
-        :return: List of vegetablesRecord objects
+        :return: True if the loading was successful, False if unsuccessful
         """
         self.records.clear()
 
@@ -35,12 +34,17 @@ class VegetablesServices:
                     if rows_counter == 100:
                         break
 
-        except FileNotFoundError:
-            print(f"File ${self.file_path} not found.")
-        except IOError:
-            print(f"Error reading file ${self.file_path}.")
+                return True
 
-    def save_data(self, records, new_file_path):
+        except FileNotFoundError:
+            print(f"File {self.file_path} not found.")
+            return False
+        except IOError:
+            print(f"Error reading file {self.file_path}.")
+            return False
+
+    @staticmethod
+    def save_data(records, new_file_path):
         """
         Saves the in-memory dataset to a new file on the desk.
         :param records: the list of records needs to be saved
