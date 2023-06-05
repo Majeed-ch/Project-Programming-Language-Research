@@ -1,10 +1,10 @@
-from view.vegetablesView import VegetablesView as View
+from controller.vegetableController import VegetableController
 
 
 def main():
-    View.display_menu()
-    selection = View.get_option_input()
-    print("Loading...")
+    file_path = "32100260.csv"
+    ctrl = VegetableController(file_path)
+    ctrl.start()
 
 
 if __name__ == '__main__':

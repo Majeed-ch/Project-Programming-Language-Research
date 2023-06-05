@@ -1,12 +1,4 @@
 class VegetablesView:
-    # private variables
-    __ALL_VEGETABLES = "1"
-    __ONE_VEGETABLE = "2"
-    __ADD_VEGETABLE = "3"
-    __UPDATE_VEGETABLE = "4"
-    __DELETE_VEGETABLE = "5"
-    __EXTRACT_RECORDS = "6"
-    __EXIT = "X"
 
     @staticmethod
     def display_menu():
@@ -28,7 +20,7 @@ class VegetablesView:
 
     @staticmethod
     def get_option_input():
-        return input('Choose option: ')
+        return input('Choose an option from the menu: ')
 
     @staticmethod
     def list_all_veg(vegetables):
@@ -93,3 +85,7 @@ class VegetablesView:
         """
         pass
         # TODO: Show a message that file is saving, call save_file method from controller, show done or fail message.
+
+    @staticmethod
+    def display_author_name():
+        print("__Program created by Abdul Mazed__")
