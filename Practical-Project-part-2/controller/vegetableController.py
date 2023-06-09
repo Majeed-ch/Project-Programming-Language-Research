@@ -72,37 +72,18 @@ class VegetableController:
         Displays a vegetableRecord object based on the id entered by the user
         :return:
         """
-        id_from_user = View.user_input_veg_id_view()
+        id_from_user = str(View.user_input_veg_id_view())
         vegetable_obj = self.service.get_veg_by_id(id_from_user)
 
         if vegetable_obj:
             View.display_one_veg(vegetable_obj)
-            if self.is_repeat_operation('view'):
+            if View.is_repeat_operation('view'):
                 self.display_one_veg()
             else:
                 return
         else:
             print(f"Sorry I didn't find a record with id ({id_from_user})\n")
-            if self.is_repeat_operation('view'):
+            if View.is_repeat_operation('view'):
                 self.display_one_veg()
             else:
                 return
-
-    @staticmethod
-    def is_repeat_operation(action: str) -> bool:
-        """
-        Asks user if they wish to repeat the same operation they were using,
-        so they do not need to go to the menu again
-        :param action: The action being performed
-        :return: True if the user wants to repeat, False otherwise
-        """
-        while True:
-            response = input(f"Do you want to {action} another record? (y/n)").lower()
-            print(" ")
-            if response[0] == 'y':
-                return True
-            elif response[0] == 'n':
-                return False
-            else:
-                print("Invalid input. Please enter 'y' for yes or 'n' for no.")
-                print("=" * 10, end="\n")

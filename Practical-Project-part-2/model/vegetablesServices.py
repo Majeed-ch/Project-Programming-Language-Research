@@ -7,7 +7,7 @@ class VegetablesServices:
         self.file_path = file_path
         self.records = []
 
-    def load_data(self):
+    def load_data(self) -> bool:
         """
         Loads the dataset to the memory from the csv file.
         :return: True if the loading was successful, False if unsuccessful
@@ -61,14 +61,14 @@ class VegetablesServices:
         except Exception as e:
             print("Error occurred while saving data: ", str(e))
 
-    def get_all_vegetables(self):
+    def get_all_vegetables(self) -> list:
         """
         Retrieves all the records that was loaded form the file.
         :return: List of VegetablesRecord objects
         """
         return self.records
 
-    def get_veg_by_id(self, veg_id):
+    def get_veg_by_id(self, veg_id: str) -> VegetablesRecord | None:
         """
         Retrieves one record from the list based on the passed id
         :param veg_id: the id of the requested record
@@ -94,7 +94,7 @@ class VegetablesServices:
         index = self.records.index(old_record)
         self.records[index] = new_record
 
-    def delete_vegetable(self, veg_id):
+    def delete_vegetable(self, veg_id: str):
         """
         Deletes a record from the list of records
         :param veg_id: The id of the object that needs to be deleted
@@ -112,7 +112,7 @@ class VegetablesServices:
         else:
             print("There was an error deleting the record")
 
-    def _search_list(self, veg_id):
+    def _search_list(self, veg_id: str) -> VegetablesRecord | None:
         """
         Searches the list of records for the object with the id equals the passed id
         :param veg_id: the id of the requested record
