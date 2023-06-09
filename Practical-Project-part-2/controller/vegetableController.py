@@ -39,7 +39,7 @@ class VegetableController:
             if option == self.__ALL_VEGETABLES:
                 self.list_all_veges()
             elif option == self.__ONE_VEGETABLE:
-                print("Implement show one in controller.")
+                self.display_one_veg()
             elif option == self.__ADD_VEGETABLE:
                 print("Implement add record in controller.")
             elif option == self.__UPDATE_VEGETABLE:
@@ -54,7 +54,7 @@ class VegetableController:
                 sleep(2)
                 sys.exit()
             else:
-                input("Please enter a correct option value.")
+                print("Please enter a correct option value.\n")
 
     def list_all_veges(self):
         """
@@ -66,4 +66,19 @@ class VegetableController:
             vegetables.append(record.to_list())
 
         View.list_all_veges(vegetables)
+
+    def display_one_veg(self):
+        """
+        Displays a vegetableRecord object based on the id entered by the user
+        :return:
+        """
+        id_from_user = View.user_input_veg_id_view()
+        vegetable_obj = self.service.get_veg_by_id(id_from_user)
+
+        if vegetable_obj:
+            View.display_one_veg(vegetable_obj)
+            print("\n DO YOU WANT TO SEE ANOTHER RECORD? placeholder")
+        else:
+            print(f"Sorry I didn't find a record with id ({id_from_user})")
+            print("\n DO YOU WANT TO SEE ANOTHER RECORD? placeholder")
 

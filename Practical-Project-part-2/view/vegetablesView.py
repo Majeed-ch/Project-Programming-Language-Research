@@ -10,20 +10,23 @@ class VegetablesView:
         :return:
         None
         """
-        print(
-            "\t\tOptions Menu\n\n"
-            + "\t(1) View all vegetables\n"
-            + "\t(2) View one vegetable\n"
-            + "\t(3) Add vegetable\n"
-            + "\t(4) Update vegetable\n"
-            + "\t(5) delete vegetable\n"
-            + "\t(6) Extract records to a file\n"
-            + "\t(X) Exit\n"
-        )
+        menu = [
+            ["", "Abdul Mazed"],
+            ["", "Options Menu"],
+            ["(1)", "View all vegetables"],
+            ["(2)", "View one vegetable"],
+            ["(3)", "Add vegetable"],
+            ["(4)", "Update vegetable"],
+            ["(5)", "Delete vegetable"],
+            ["(6)", "Extract records to a file"],
+            ["(X)", "Exit"],
+        ]
+
+        print(tabulate(menu, tablefmt="fancy_grid"))
 
     @staticmethod
     def get_option_input():
-        return input('Choose an option from the menu: ')
+        return input('\nChoose an option from the menu: ')
 
     @staticmethod
     def list_all_veges(vegetables):
@@ -34,11 +37,11 @@ class VegetablesView:
         None
         """
         #TODO: print the passed list in a table (like in project 1).
-        header_row = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
+        header_row = ["ID", "REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
                       "SCALAR_FACTOR",
                       "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
 
-        print(tabulate(vegetables, headers=header_row, tablefmt="grid"))
+        print(tabulate(vegetables, headers=header_row, tablefmt="fancy_grid"))
 
         # for column in header_row:
         #     print(column, end=' | ')
@@ -49,14 +52,37 @@ class VegetablesView:
         #         print(column, end=' | ')
 
     @staticmethod
-    def display_one_veg():
+    def display_one_veg(vegetable):
         """
-        Asks user for record id then prints out the details of that record.
+        Prints out the details of the passed vegetableRecord object
         :return:
-        None
         """
-        pass
         # TODO: Get user input for the record id, get the record form a controller method then print it.
+        veg_details = [
+            ['ID', vegetable.veg_id],
+            ['REF_DATE', vegetable.ref_date],
+            ['GEO', vegetable.geo],
+            ['DGUID', vegetable.dguid],
+            ['Type of product', vegetable.type_of_product],
+            ['Type of storage', vegetable.type_of_storage],
+            ['UOM', vegetable.uom],
+            ['UOM_ID', vegetable.uom_id],
+            ['SCALAR_FACTOR', vegetable.scalar_factor],
+            ['SCALAR_ID', vegetable.scalar_id],
+            ['VECTOR', vegetable.vector],
+            ['COORDINATE', vegetable.coordinate],
+            ['VALUE', vegetable.value],
+            ['STATUS', vegetable.status],
+            ['SYMBOL', vegetable.symbol],
+            ['TERMINATED', vegetable.terminated],
+            ['DECIMALS', vegetable.decimals]
+        ]
+
+        print(tabulate(veg_details, tablefmt='simple'))
+
+
+
+
 
     @staticmethod
     def add_veg():
@@ -100,6 +126,19 @@ class VegetablesView:
         """
         pass
         # TODO: Show a message that file is saving, call save_file method from controller, show done or fail message.
+
+    @staticmethod
+    def user_input_veg_id_view():
+        """
+
+        :return: The id of the vegetable record
+        """
+        while True:
+            try:
+                input_veg_id = int(input("Please enter the ID of the record: "))
+                return input_veg_id
+            except ValueError:
+                print("Invalid input. Please check your input, it should be a number\n.")
 
     @staticmethod
     def display_author_name():

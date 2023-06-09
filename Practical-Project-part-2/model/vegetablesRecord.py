@@ -32,6 +32,7 @@ class VegetablesRecord:
         Generates an incremental id each time it's called
         :return: incremental id integer
         """
+        #TODO: fix the bug where the id is always 1
         self.last_id += 1
         return self.last_id
 
@@ -41,7 +42,7 @@ class VegetablesRecord:
         :return: List of attributes
         """
         return [
-            self.ref_date, self.geo, self.dguid, self.type_of_product, self.type_of_storage,
+            self.veg_id, self.ref_date, self.geo, self.dguid, self.type_of_product, self.type_of_storage,
             self.uom, self.uom_id, self.scalar_factor, self.scalar_id, self.vector,
             self.coordinate, self.value, self.status, self.symbol, self.terminated, self.decimals
         ]
@@ -51,7 +52,7 @@ class VegetablesRecord:
         A string representative of the object
         :return: A string of attributes comma separated
         """
-        return f"ref_date: {self.ref_date}, geo: {self.geo}, dguid: {self.dguid}, " \
+        return f"Id: {self.veg_id}, ref_date: {self.ref_date}, geo: {self.geo}, dguid: {self.dguid}, " \
                f"type_of_product: {self.type_of_product}, type_of_storage: {self.type_of_storage}, " \
                f"uom: {self.uom}, uom_id: {self.uom_id}, scalar_factor: {self.scalar_factor}, " \
                f"scalar_id: {self.scalar_id}, vector: {self.vector}, coordinate: {self.coordinate}, " \
