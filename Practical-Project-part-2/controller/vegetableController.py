@@ -41,7 +41,7 @@ class VegetableController:
             elif option == self.__ONE_VEGETABLE:
                 self.display_one_veg()
             elif option == self.__ADD_VEGETABLE:
-                print("Implement add record in controller.")
+                self.add_vegetable()
             elif option == self.__UPDATE_VEGETABLE:
                 print("Implement update record in controller.")
             elif option == self.__DELETE_VEGETABLE:
@@ -87,3 +87,7 @@ class VegetableController:
                 self.display_one_veg()
             else:
                 return
+
+    def add_vegetable(self):
+        vegetable_obj = View.add_vegetable()
+        self.service.add_vegetable(vegetable_obj)

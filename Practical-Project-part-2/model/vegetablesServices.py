@@ -79,10 +79,14 @@ class VegetablesServices:
     def add_vegetable(self, record):
         """
         Adds a new record to the list of vegetableRecords
-        :param record: The vegetableRecord object
+        :param record: A list of vegetableRecord attributes values
         :return:
         """
-        self.records.append(record)
+
+        vegetable_obj = VegetablesRecord(record[0], record[1], record[2], record[3], record[4], record[5], record[6],
+                                         record[7], record[8], record[9], record[10], record[11], record[12],
+                                         record[13], record[14], record[15])
+        self.records.append(vegetable_obj)
 
     def update_vegetable(self, old_record, new_record):
         """

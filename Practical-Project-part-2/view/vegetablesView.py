@@ -26,6 +26,10 @@ class VegetablesView:
 
     @staticmethod
     def get_option_input():
+        """
+        Asks user to select an option from the menu
+        :return: The selected option number/letter
+        """
         return input('\nChoose an option from the menu: ')
 
     @staticmethod
@@ -42,14 +46,6 @@ class VegetablesView:
                       "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
 
         print(tabulate(vegetables, headers=header_row, tablefmt="fancy_grid"))
-
-        # for column in header_row:
-        #     print(column, end=' | ')
-        #
-        # for row in vegetables:
-        #     print("")
-        #     for column in row:
-        #         print(column, end=' | ')
 
     @staticmethod
     def display_one_veg(vegetable):
@@ -80,20 +76,24 @@ class VegetablesView:
 
         print(tabulate(veg_details, tablefmt='simple'))
 
-
-
-
-
     @staticmethod
-    def add_veg():
+    def add_vegetable():
         """
-        Interacts with the user to set values of one record then adds it to the records in-memory.
-        :return:
-        None
+        Interacts with the user to set values of one record to be added to the list of records in-memory.
+        :return: A list of vegetableRecord attributes values to be inserted/added.
         """
-        pass
         # TODO: Create an object and get inputs from the user for each record member then pass it to the controller to
         #  insert it in-memory.
+        record = []
+        columns = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID", "SCALAR_FACTOR",
+                   "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
+
+        print("Please enter the values for each of the columns: ")
+        for column in columns:
+            value = input(f"{column}: ")
+            record.append(value)
+
+        return record
 
     @staticmethod
     def update_veg():
@@ -130,7 +130,7 @@ class VegetablesView:
     @staticmethod
     def user_input_veg_id_view():
         """
-
+        Asks the user for the id of the vegetable record
         :return: The id of the vegetable record
         """
         while True:
@@ -149,7 +149,7 @@ class VegetablesView:
         :return: True if the user wants to repeat, False otherwise
         """
         while True:
-            response = input(f"Do you want to {action} another record? (y/n)").lower()
+            response = input(f"Do you want to {action} another record? (y/n) ").lower()
             print(" ")
             if response[0] == 'y':
                 return True
