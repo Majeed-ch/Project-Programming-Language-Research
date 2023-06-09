@@ -89,19 +89,20 @@ class VegetableController:
                 return
 
     @staticmethod
-    def is_repeat_operation(action: str):
+    def is_repeat_operation(action: str) -> bool:
         """
         Asks user if they wish to repeat the same operation they were using,
         so they do not need to go to the menu again
-        :return: True if the user wants to repeat or False otherwise
+        :param action: The action being performed
+        :return: True if the user wants to repeat, False otherwise
         """
         while True:
-            response = input(f"Do you want to {action} another record?(y/n)")
+            response = input(f"Do you want to {action} another record? (y/n)").lower()
             print(" ")
-            if response[0].lower() == 'y':
+            if response[0] == 'y':
                 return True
-            elif response[0].lower() == 'n':
+            elif response[0] == 'n':
                 return False
             else:
-                print("Invalid input, please enter yes (y) or no (n).")
+                print("Invalid input. Please enter 'y' for yes or 'n' for no.")
                 print("=" * 10, end="\n")
