@@ -77,21 +77,31 @@ class VegetableController:
 
         if vegetable_obj:
             View.display_one_veg(vegetable_obj)
-            self.another_record()
+            if self.is_repeat_operation('view'):
+                self.display_one_veg()
+            else:
+                return
         else:
             print(f"Sorry I didn't find a record with id ({id_from_user})\n")
+            if self.is_repeat_operation('view'):
+                self.display_one_veg()
+            else:
+                return
 
-    def another_record(self):
+    @staticmethod
+    def is_repeat_operation(action: str):
         """
-        Asks user if they wish to display another record
-        :return:
+        Asks user if they wish to repeat the same operation they were using,
+        so they do not need to go to the menu again
+        :return: True if the user wants to repeat or False otherwise
         """
         while True:
-            response = input(f"Do you want to see another record?(y/n)\n")
+            response = input(f"Do you want to {action} another record?(y/n)")
+            print(" ")
             if response[0].lower() == 'y':
-                self.display_one_veg()
+                return True
             elif response[0].lower() == 'n':
-                return
+                return False
             else:
                 print("Invalid input, please enter yes (y) or no (n).")
                 print("=" * 10, end="\n")
