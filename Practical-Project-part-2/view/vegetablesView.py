@@ -25,11 +25,7 @@ class VegetablesView:
         print(tabulate(menu, tablefmt="fancy_grid"))
 
     @staticmethod
-    def get_option_input() -> str:
-        """
-        Asks user for an option from the menu
-        :return: The response from the user
-        """
+    def get_option_input():
         return input('\nChoose an option from the menu: ')
 
     @staticmethod
@@ -46,6 +42,14 @@ class VegetablesView:
                       "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
 
         print(tabulate(vegetables, headers=header_row, tablefmt="fancy_grid"))
+
+        # for column in header_row:
+        #     print(column, end=' | ')
+        #
+        # for row in vegetables:
+        #     print("")
+        #     for column in row:
+        #         print(column, end=' | ')
 
     @staticmethod
     def display_one_veg(vegetable):
@@ -75,6 +79,10 @@ class VegetablesView:
         ]
 
         print(tabulate(veg_details, tablefmt='simple'))
+
+
+
+
 
     @staticmethod
     def add_veg():
@@ -120,9 +128,9 @@ class VegetablesView:
         # TODO: Show a message that file is saving, call save_file method from controller, show done or fail message.
 
     @staticmethod
-    def user_input_veg_id_view() -> int:
+    def user_input_veg_id_view():
         """
-        Asks the user for the id of the vegetable record
+
         :return: The id of the vegetable record
         """
         while True:
@@ -130,26 +138,7 @@ class VegetablesView:
                 input_veg_id = int(input("Please enter the ID of the record: "))
                 return input_veg_id
             except ValueError:
-                print("Invalid input. Please check your input, it should be a number.\n")
-
-    @staticmethod
-    def is_repeat_operation(action: str) -> bool:
-        """
-        Asks user if they wish to repeat the same operation they were using,
-        so they do not need to go to the menu again
-        :param action: The action being performed
-        :return: True if the user wants to repeat, False otherwise
-        """
-        while True:
-            response = input(f"Do you want to {action} another record? (y/n) ").lower()
-            print(" ")
-            if response[0] == 'y':
-                return True
-            elif response[0] == 'n':
-                return False
-            else:
-                print("Invalid input. Please enter 'y' for yes or 'n' for no.")
-                print("=" * 10, end="\n")
+                print("Invalid input. Please check your input, it should be a number\n.")
 
     @staticmethod
     def display_author_name():
