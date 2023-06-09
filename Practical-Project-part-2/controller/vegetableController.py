@@ -77,8 +77,21 @@ class VegetableController:
 
         if vegetable_obj:
             View.display_one_veg(vegetable_obj)
-            print("\n DO YOU WANT TO SEE ANOTHER RECORD? placeholder")
+            self.another_record()
         else:
-            print(f"Sorry I didn't find a record with id ({id_from_user})")
-            print("\n DO YOU WANT TO SEE ANOTHER RECORD? placeholder")
+            print(f"Sorry I didn't find a record with id ({id_from_user})\n")
 
+    def another_record(self):
+        """
+        Asks user if they wish to display another record
+        :return:
+        """
+        while True:
+            response = input(f"Do you want to see another record?(y/n)\n")
+            if response[0].lower() == 'y':
+                self.display_one_veg()
+            elif response[0].lower() == 'n':
+                return
+            else:
+                print("Invalid input, please enter yes (y) or no (n).")
+                print("=" * 10, end="\n")
