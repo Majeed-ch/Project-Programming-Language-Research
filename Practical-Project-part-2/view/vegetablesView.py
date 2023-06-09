@@ -138,7 +138,26 @@ class VegetablesView:
                 input_veg_id = int(input("Please enter the ID of the record: "))
                 return input_veg_id
             except ValueError:
-                print("Invalid input. Please check your input, it should be a number\n.")
+                print("Invalid input. Please check your input, it should be a number.\n")
+
+    @staticmethod
+    def is_repeat_operation(action: str) -> bool:
+        """
+        Asks user if they wish to repeat the same operation they were using,
+        so they do not need to go to the menu again
+        :param action: The action being performed
+        :return: True if the user wants to repeat, False otherwise
+        """
+        while True:
+            response = input(f"Do you want to {action} another record? (y/n)").lower()
+            print(" ")
+            if response[0] == 'y':
+                return True
+            elif response[0] == 'n':
+                return False
+            else:
+                print("Invalid input. Please enter 'y' for yes or 'n' for no.")
+                print("=" * 10, end="\n")
 
     @staticmethod
     def display_author_name():
