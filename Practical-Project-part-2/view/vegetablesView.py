@@ -3,6 +3,9 @@ from tabulate import tabulate
 
 class VegetablesView:
 
+    _vegetable_fields = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
+                         "SCALAR_FACTOR", "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL",
+                         "TERMINATED", "DECIMALS"]
     @staticmethod
     def display_menu():
         """
@@ -85,26 +88,42 @@ class VegetablesView:
         # TODO: Create an object and get inputs from the user for each record member then pass it to the controller to
         #  insert it in-memory.
         record = []
-        columns = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID", "SCALAR_FACTOR",
-                   "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
 
         print("Please enter the values for each of the columns: ")
-        for column in columns:
+        for column in VegetablesView._vegetable_fields:
             value = input(f"{column}: ")
             record.append(value)
 
         return record
 
     @staticmethod
-    def update_veg():
+    def update_vegetable(vegetable):
         """
-        Get user inputs to update a record based on the record id entered by the user.
+        Gets user inputs to update the vegetableRecord passed to the method.
+        :param vegetable: The VegetableRecord object to be updated
         :return:
-        None
         """
-        pass
         # TODO: Get the id from the user, get the corresponding record from the controller, inputs from the user for
         #  each record member then pass the record to the controller to update the record in-memory.
+        old_vegetable_list = vegetable.to_list()
+        old_vegetable_list.pop(0)  # removing the id
+
+        new_vegetable_list = []
+
+        print("="*10)
+        print("Enter the value of each column to update it\n"
+              "Leave it empty if no need to update")
+        print("=" * 10)
+
+        for column, old_value in zip(VegetablesView._vegetable_fields, old_vegetable_list):
+            new_value = input(f"{column}: {old_value} <- ")
+
+            if new_value:
+                new_vegetable_list.append(new_value)
+            else:
+                new_vegetable_list.append(old_value)
+
+        return new_vegetable_list
 
     @staticmethod
     def delete_veg():

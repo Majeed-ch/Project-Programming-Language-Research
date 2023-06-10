@@ -8,6 +8,7 @@ from view.vegetablesView import VegetablesView as View
 
 class VegetableController:
     # private variables
+    # TODO: change the names to lowercase with leading _
     __ALL_VEGETABLES = "1"
     __ONE_VEGETABLE = "2"
     __ADD_VEGETABLE = "3"
@@ -43,7 +44,7 @@ class VegetableController:
             elif option == self.__ADD_VEGETABLE:
                 self.add_vegetable()
             elif option == self.__UPDATE_VEGETABLE:
-                print("Implement update record in controller.")
+                self.update_vegetable()
             elif option == self.__DELETE_VEGETABLE:
                 print("Implement delete record in controller.")
             elif option == self.__EXTRACT_RECORDS:
@@ -91,3 +92,11 @@ class VegetableController:
     def add_vegetable(self):
         vegetable_obj = View.add_vegetable()
         self.service.add_vegetable(vegetable_obj)
+        # TODO: add a successful/failur message, and an option to insert another record
+
+    def update_vegetable(self):
+        id_from_user = View.user_input_veg_id_view()
+        old_vegetable_obj = self.service.get_veg_by_id(id_from_user)
+        new_vegetable_obj_list = View.update_vegetable(old_vegetable_obj)
+
+        self.service.update_vegetable(old_vegetable_obj, new_vegetable_obj_list)

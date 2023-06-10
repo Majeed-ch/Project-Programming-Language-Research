@@ -81,15 +81,29 @@ class VegetablesServices:
         vegetable_obj = VegetablesRecord.from_list(record)
         self.records.append(vegetable_obj)
 
-    def update_vegetable(self, old_record, new_record):
+    def update_vegetable(self, old_record, new_record_list):
         """
         Updates the list of records with the passed record
         :param old_record: The vegetableRecord object that needs to be updated
-        :param new_record: The updated vegetableRecord object
+        :param new_record_list: The updated vegetableRecord object
         :return:
         """
-        index = self.records.index(old_record)
-        self.records[index] = new_record
+        old_record.ref_date = new_record_list[0]
+        old_record.geo = new_record_list[1]
+        old_record.dguid = new_record_list[2]
+        old_record.type_of_product = new_record_list[3]
+        old_record.type_of_storage = new_record_list[4]
+        old_record.uom = new_record_list[5]
+        old_record.uom_id = new_record_list[6]
+        old_record.scalar_factor = new_record_list[7]
+        old_record.scalar_id = new_record_list[8]
+        old_record.vector = new_record_list[9]
+        old_record.coordinate = new_record_list[10]
+        old_record.value = new_record_list[11]
+        old_record.status = new_record_list[12]
+        old_record.symbol = new_record_list[13]
+        old_record.terminated = new_record_list[14]
+        old_record.decimals = new_record_list[15]
 
     def delete_vegetable(self, veg_id):
         """
@@ -118,5 +132,5 @@ class VegetablesServices:
         for record in self.records:
             if record.veg_id == veg_id:
                 return record
-            else:
-                return None
+
+        return None
