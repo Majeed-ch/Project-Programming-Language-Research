@@ -9,7 +9,7 @@ class VegetablesRecord:
         """
         Initialize the object with the provided attribute values
         """
-        self.veg_id = self.generate_id()
+        self.veg_id = self.last_id + 1
         self.ref_date = ref_date
         self.geo = geo
         self.dguid = dguid
@@ -26,6 +26,22 @@ class VegetablesRecord:
         self.symbol = symbol
         self.terminated = terminated
         self.decimals = decimals
+
+        self.last_id += 1
+
+    @classmethod
+    def from_list(cls, data_list):
+        """
+        Alternate constructor that creates a new VegetablesRecord instance from a list of data.
+
+        :param data_list: A list containing the data for the VegetablesRecord instance.
+            The list should follow the order of the attributes:
+            [ref_date, geo, dguid, type_of_product, type_of_storage, uom, uom_id,
+            scalar_factor, scalar_id, vector, coordinate, value, status, symbol,
+            terminated, decimals]
+        :return: VegetablesRecord, A new instance of the VegetablesRecord class initialized with the data from the list.
+        """
+        return cls(*data_list)
 
     def generate_id(self):
         """

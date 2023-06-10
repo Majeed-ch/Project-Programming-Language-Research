@@ -25,12 +25,8 @@ class VegetablesServices:
                 rows_counter = 0
                 for row in reader:
                     rows_counter += 1
-                    record = VegetablesRecord(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7],
-                                              row[8],
-                                              row[9], row[10], row[11], row[12], row[13], row[14], row[15])
+                    record = VegetablesRecord.from_list(row)
                     self.records.append(record)
-                    # record = VegetablesRecord(*row)
-                    # self.records.append(record)
                     if rows_counter == 100:
                         break
 
@@ -82,10 +78,7 @@ class VegetablesServices:
         :param record: A list of vegetableRecord attributes values
         :return:
         """
-
-        vegetable_obj = VegetablesRecord(record[0], record[1], record[2], record[3], record[4], record[5], record[6],
-                                         record[7], record[8], record[9], record[10], record[11], record[12],
-                                         record[13], record[14], record[15])
+        vegetable_obj = VegetablesRecord.from_list(record)
         self.records.append(vegetable_obj)
 
     def update_vegetable(self, old_record, new_record):
