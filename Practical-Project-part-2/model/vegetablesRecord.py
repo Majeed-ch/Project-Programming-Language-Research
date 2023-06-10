@@ -1,15 +1,15 @@
 class VegetablesRecord:
     """
-    A data transfer object for the dataset 32100260
+    A data transfer object for the Vegetables dataset 32100260
     """
-    last_id = 0
+    _last_id = 0
 
     def __init__(self, ref_date, geo, dguid, type_of_product, type_of_storage, uom, uom_id, scalar_factor,
                  scalar_id, vector, coordinate, value, status, symbol, terminated, decimals):
         """
         Initialize the object with the provided attribute values
         """
-        self.veg_id = self.last_id + 1
+        self.veg_id = self.generate_id()
         self.ref_date = ref_date
         self.geo = geo
         self.dguid = dguid
@@ -27,8 +27,6 @@ class VegetablesRecord:
         self.terminated = terminated
         self.decimals = decimals
 
-        self.last_id += 1
-
     @classmethod
     def from_list(cls, data_list):
         """
@@ -43,14 +41,14 @@ class VegetablesRecord:
         """
         return cls(*data_list)
 
-    def generate_id(self):
+    @staticmethod
+    def generate_id():
         """
-        Generates an incremental id each time it's called
-        :return: incremental id integer
+        Generates an incremental id for each time it's called (i.e each time an object is initialized)
+        :return: incremental id integer starting from 1
         """
-        #TODO: fix the bug where the id is always 1
-        self.last_id += 1
-        return self.last_id
+        VegetablesRecord._last_id += 1
+        return VegetablesRecord._last_id
 
     def to_list(self):
         """
