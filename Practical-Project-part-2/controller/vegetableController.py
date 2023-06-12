@@ -1,4 +1,5 @@
 import datetime
+import os
 import sys
 from time import sleep
 
@@ -32,29 +33,35 @@ class VegetableController:
         """
 
         while True:
-            # os.system('clear')
-            View.display_author_name()
+            View.display_student_name()
             View.display_menu()
 
             option = View.get_option_input()
 
             if option == self._ALL_VEGETABLES:
+                os.system('clear')
                 self.list_all_veges()
             elif option == self._ONE_VEGETABLE:
+                os.system('clear')
                 self.display_one_veg()
             elif option == self._ADD_VEGETABLE:
+                os.system('clear')
                 self.add_vegetable()
             elif option == self._UPDATE_VEGETABLE:
+                os.system('clear')
                 self.update_vegetable()
             elif option == self._DELETE_VEGETABLE:
+                os.system('clear')
                 self.delete_vegetable()
             elif option == self._EXTRACT_RECORDS:
+                os.system('clear')
                 self.save_to_file()
             elif option == self._RELOAD_RECORDS:
+                os.system('clear')
                 self.reload_file()
             elif option.upper() == self._EXIT:
                 print("Exiting the program.\n")
-                View.display_author_name()
+                View.display_student_name()
                 sleep(2)
                 sys.exit()
             else:

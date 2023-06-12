@@ -48,8 +48,15 @@ class VegetablesView:
         header_row = ["ID", "REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
                       "SCALAR_FACTOR",
                       "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
+        student_name = "Program created by Abdul Mazed"
+        rows_with_name = []
 
-        print(tabulate(vegetables, headers=header_row, tablefmt="fancy_grid"))
+        for i, row in enumerate(vegetables, 1):
+            rows_with_name.append(row)
+            if i % 10 == 0:
+                rows_with_name.append([student_name])
+
+        print(tabulate(rows_with_name, headers=header_row, tablefmt="fancy_grid"))
 
     @staticmethod
     def display_one_veg(vegetable):
@@ -199,5 +206,5 @@ class VegetablesView:
                 print("=" * 10, end="\n")
 
     @staticmethod
-    def display_author_name():
-        print("__Program created by Abdul Mazed__")
+    def display_student_name():
+        print(tabulate([["Program created by Abdul Mazed"]], tablefmt="double_outline"))
