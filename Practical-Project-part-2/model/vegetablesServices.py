@@ -105,23 +105,20 @@ class VegetablesServices:
         old_record.terminated = new_record_list[14]
         old_record.decimals = new_record_list[15]
 
-    def delete_vegetable(self, veg_id):
+    def delete_vegetable(self, vegetable):
         """
-        Deletes a record from the list of records
-        :param veg_id: The id of the object that needs to be deleted
-        :return:
+        Removes a vegetable record from the list of records.
+
+        This method removes the specified `vegetable` from the `records` list.
+
+        Args:
+            self: The current instance of the class.
+            vegetable: The vegetable record to be deleted.
+
+        Returns:
+            None
         """
-        record = self._search_list(veg_id)
-        if record is not None:
-            response = input(f"are you sure you want to delete this record?(y/n)\n"
-                             f"{record.__str__()}")
-            if response[0].lower() == 'y':
-                self.records.remove(record)
-            else:
-                print('canceling deletion')
-                return
-        else:
-            print("There was an error deleting the record")
+        self.records.remove(vegetable)
 
     def _search_list(self, veg_id):
         """

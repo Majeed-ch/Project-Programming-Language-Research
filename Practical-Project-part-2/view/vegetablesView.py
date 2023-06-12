@@ -126,15 +126,27 @@ class VegetablesView:
         return new_vegetable_list
 
     @staticmethod
-    def delete_veg():
+    def delete_vegetable():
         """
-        Deletes a record from the in-memory records based on the id entered by the user, a conformation message is shown
-        before processing the deletion.
-        :return:
-        None
+        Prompts the user for confirmation to delete a record.
+
+        This function continuously asks the user for confirmation until a valid input
+        of 'yes' or 'no' is provided. The function returns a boolean value based on
+        the user's choice.
+
+        Returns:
+            bool: True if the user confirms deletion, False if cancellation is requested.
         """
-        pass
-        # TODO: ask for id, pass it to the controller to delete it.
+        while True:
+            response = input("\nAre you sure want to delete this record? (y/n) ").strip().lower()
+            if response in ['yes', 'y']:
+                return True
+            elif response in ['no', 'n']:
+                print("\nCanceling...")
+                return False
+            else:
+                print("Invalid input. Please enter yes or no.")
+                print("=" * 10, end="\n")
 
     @staticmethod
     def save_file_view():

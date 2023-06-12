@@ -46,7 +46,7 @@ class VegetableController:
             elif option == self.__UPDATE_VEGETABLE:
                 self.update_vegetable()
             elif option == self.__DELETE_VEGETABLE:
-                print("Implement delete record in controller.")
+                self.delete_vegetable()
             elif option == self.__EXTRACT_RECORDS:
                 print("Implement save file in controller.")
             elif option.upper() == self.__EXIT:
@@ -95,8 +95,35 @@ class VegetableController:
         # TODO: add a successful/failur message, and an option to insert another record
 
     def update_vegetable(self):
+        # Todo: improve validation (like in display_one_veg())
         id_from_user = View.user_input_veg_id_view()
         old_vegetable_obj = self.service.get_veg_by_id(id_from_user)
         new_vegetable_obj_list = View.update_vegetable(old_vegetable_obj)
 
         self.service.update_vegetable(old_vegetable_obj, new_vegetable_obj_list)
+
+    def delete_vegetable(self):
+        """
+        This function deletes a vegetable record based on user input and allows for repeating the operation.
+        :return: None.
+        """
+        id_from_user = View.user_input_veg_id_view()
+        vegetable_obj = self.service.get_veg_by_id(id_from_user)
+
+        if vegetable_obj:
+            View.display_one_veg(vegetable_obj)
+            is_delete = View.delete_vegetable()
+            if is_delete:
+                self.service.delete_vegetable(vegetable_obj)
+                print("The record is deleted successfully.\n")
+
+            if View.is_repeat_operation('delete'):
+                self.delete_vegetable()
+            else:
+                return
+        else:
+            print(f"Sorry I didn't find a record with id ({id_from_user})\n")
+            if View.is_repeat_operation('delete'):
+                self.delete_vegetable()
+            else:
+                return
