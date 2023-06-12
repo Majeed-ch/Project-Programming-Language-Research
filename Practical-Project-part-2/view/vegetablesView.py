@@ -168,14 +168,14 @@ class VegetablesView:
         :return: True if the user wants to repeat, False otherwise
         """
         while True:
-            response = input(f"Do you want to {action} another record? (y/n) ").lower()
+            response = input(f"Do you want to {action} another record? (y/n) ").strip().lower()
             print(" ")
-            if response[0] == 'y':
+            if response in ['yes', 'y']:
                 return True
-            elif response[0] == 'n':
+            elif response in ['no', 'n']:
                 return False
             else:
-                print("Invalid input. Please enter 'y' for yes or 'n' for no.")
+                print("Invalid input. Please enter yes or no.")
                 print("=" * 10, end="\n")
 
     @staticmethod
