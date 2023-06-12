@@ -149,14 +149,21 @@ class VegetablesView:
                 print("=" * 10, end="\n")
 
     @staticmethod
-    def save_file_view():
+    def save_to_file(file_name):
         """
-        Prints a message for processing the file saving and a message after it finished.
-        :return:
-        None
+        Saves a file with the given filename.
+
+        This static method prints a message indicating the filename being saved.
+
+        Args:
+            file_name (str): The name of the file to be saved.
+
+        Returns:
+            None
         """
-        pass
-        # TODO: Show a message that file is saving, call save_file method from controller, show done or fail message.
+
+        print(f"saving file as {file_name}\n")
+
 
     @staticmethod
     def user_input_veg_id_view():

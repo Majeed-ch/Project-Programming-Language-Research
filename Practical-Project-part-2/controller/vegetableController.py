@@ -1,4 +1,4 @@
-import os
+import datetime
 import sys
 from time import sleep
 
@@ -48,7 +48,7 @@ class VegetableController:
             elif option == self.__DELETE_VEGETABLE:
                 self.delete_vegetable()
             elif option == self.__EXTRACT_RECORDS:
-                print("Implement save file in controller.")
+                self.save_to_file()
             elif option.upper() == self.__EXIT:
                 print("Exiting the program.\n")
                 View.display_author_name()
@@ -127,3 +127,23 @@ class VegetableController:
                 self.delete_vegetable()
             else:
                 return
+
+    def save_to_file(self):
+        """
+        Saves the vegetable records to a file.
+
+        This method generates a filename based on the current date and time and saves the vegetable records
+        to a CSV file with the generated filename. The `View.save_to_file` method is called to show a message of the
+        file name, and the `self.service.save_data` method is called to handle the actual file saving process.
+
+        Args:
+            self: The current instance of the class.
+
+        Returns:
+            None
+        """
+        current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
+        file_name = f"vegetable_records_{current_datetime}.csv"
+
+        View.save_to_file(file_name)
+        self.service.save_data(file_name)

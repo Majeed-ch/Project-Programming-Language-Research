@@ -39,23 +39,34 @@ class VegetablesServices:
             print(f"Error reading file {self.file_path}.")
             return False
 
-    @staticmethod
-    def save_data(records, new_file_path):
+    def save_data(self, new_file_path):
         """
-        Saves the in-memory dataset to a new file on the desk.
-        :param records: the list of records needs to be saved
-        :param new_file_path: the new file name
-        :return: None
+        Saves the data to a CSV file.
+
+        This method saves the data from the `self.records` list to a CSV file specified by `new_file_path`.
+        The field names for the CSV columns are defined in `field_names` list. Each record's attributes
+        corresponding to the field names are written to the file using the `csv.writer` module.
+
+        Args:
+            self: The current instance of the class.
+            new_file_path (str): The path of the new CSV file to be created and saved.
+
+        Returns:
+            None
         """
+        field_names = ["ref_date", "geo", "dguid", "type_of_product", "type_of_storage", "uom", "uom_id",
+                       "scalar_factor", "scalar_id", "vector", "coordinate", "value", "status", "symbol",
+                       "terminated", "decimals"]
+
         try:
             with open(new_file_path, 'w', newline='') as file:
                 writer = csv.writer(file)
-                writer.writerow(VegetablesRecord.__dict__.keys())
-                for record in records:
-                    writer.writerow(record.__dict__.values())
-            print("Data saved successfully.")
+                writer.writerow(field_names)
+                for record in self.records:
+                    writer.writerow([getattr(record, field) for field in field_names])
+            print("Data saved successfully.\n")
         except Exception as e:
-            print("Error occurred while saving data: ", str(e))
+            print("Error occurred while saving data: \n", str(e))
 
     def get_all_vegetables(self):
         """
