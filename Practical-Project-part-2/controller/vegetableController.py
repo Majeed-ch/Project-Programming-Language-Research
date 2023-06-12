@@ -9,13 +9,14 @@ from view.vegetablesView import VegetablesView as View
 class VegetableController:
     # private variables
     # TODO: change the names to lowercase with leading _
-    __ALL_VEGETABLES = "1"
-    __ONE_VEGETABLE = "2"
-    __ADD_VEGETABLE = "3"
-    __UPDATE_VEGETABLE = "4"
-    __DELETE_VEGETABLE = "5"
-    __EXTRACT_RECORDS = "6"
-    __EXIT = "X"
+    _ALL_VEGETABLES = "1"
+    _ONE_VEGETABLE = "2"
+    _ADD_VEGETABLE = "3"
+    _UPDATE_VEGETABLE = "4"
+    _DELETE_VEGETABLE = "5"
+    _EXTRACT_RECORDS = "6"
+    _RELOAD_RECORDS = "7"
+    _EXIT = "X"
 
     def __init__(self, file_path: str):
         self.service = VegetablesServices(file_path)
@@ -37,19 +38,21 @@ class VegetableController:
 
             option = View.get_option_input()
 
-            if option == self.__ALL_VEGETABLES:
+            if option == self._ALL_VEGETABLES:
                 self.list_all_veges()
-            elif option == self.__ONE_VEGETABLE:
+            elif option == self._ONE_VEGETABLE:
                 self.display_one_veg()
-            elif option == self.__ADD_VEGETABLE:
+            elif option == self._ADD_VEGETABLE:
                 self.add_vegetable()
-            elif option == self.__UPDATE_VEGETABLE:
+            elif option == self._UPDATE_VEGETABLE:
                 self.update_vegetable()
-            elif option == self.__DELETE_VEGETABLE:
+            elif option == self._DELETE_VEGETABLE:
                 self.delete_vegetable()
-            elif option == self.__EXTRACT_RECORDS:
+            elif option == self._EXTRACT_RECORDS:
                 self.save_to_file()
-            elif option.upper() == self.__EXIT:
+            elif option == self._RELOAD_RECORDS:
+                self.reload_file()
+            elif option.upper() == self._EXIT:
                 print("Exiting the program.\n")
                 View.display_author_name()
                 sleep(2)
@@ -147,3 +150,22 @@ class VegetableController:
 
         View.save_to_file(file_name)
         self.service.save_data(file_name)
+
+    def reload_file(self):
+        """
+        Reloads the data from a file using the associated service.
+
+        This method calls the `load_data` method of the associated service to reload the data from a file.
+        If the data is successfully reloaded, a success message is printed.
+
+        Args:
+            self: The current instance of the class.
+
+        Returns:
+            None
+        """
+        if self.service.load_data():
+            print('='*15)
+            print("Data reloaded successfully.")
+            print('=' * 15)
+

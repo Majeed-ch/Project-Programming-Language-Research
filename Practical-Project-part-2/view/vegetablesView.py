@@ -22,6 +22,7 @@ class VegetablesView:
             ["(4)", "Update vegetable"],
             ["(5)", "Delete vegetable"],
             ["(6)", "Extract records to a file"],
+            ["(7)", "Reload data from file"],
             ["(X)", "Exit"],
         ]
 

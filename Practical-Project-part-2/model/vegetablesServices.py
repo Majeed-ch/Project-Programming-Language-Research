@@ -9,10 +9,23 @@ class VegetablesServices:
 
     def load_data(self):
         """
-        Loads the dataset to the memory from the csv file.
-        :return: True if the loading was successful, False if unsuccessful
-        """
+            Loads data from a file into the records list.
+
+            This method clears the current records list and resets the last ID of the `VegetablesRecord` class.
+            It then attempts to load data from the file specified by `self.file_path`. The file is read using the
+            `csv.reader` module, skipping the first row (header row) and parsing the next 100 rows as records.
+            Each row is converted into a `VegetablesRecord` object using the `from_list` method and added to the
+            records list. If the file is successfully loaded, the method returns True; otherwise, it returns False
+            and prints an appropriate error message.
+
+            Args:
+                self: The current instance of the class.
+
+            Returns:
+                bool: True if the file is successfully loaded, False otherwise.
+            """
         self.records.clear()
+        VegetablesRecord._last_id = 0
 
         try:
             with open(self.file_path, 'r') as csv_file:
