@@ -6,12 +6,17 @@ class VegetablesView:
     _vegetable_fields = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
                          "SCALAR_FACTOR", "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL",
                          "TERMINATED", "DECIMALS"]
+
     @staticmethod
     def display_menu():
         """
-        Prints out on the console a menu of options for managing vegetables dataset
-        :return:
-        None
+        Displays the options menu.
+
+        This static method displays an options menu with various menu items using the `tabulate` function from
+        the `tabulate` library.
+
+        Returns:
+            None
         """
         menu = [
             ["", "Abdul Mazed"],
@@ -31,20 +36,27 @@ class VegetablesView:
     @staticmethod
     def get_option_input():
         """
-        Asks user to select an option from the menu
-        :return: The selected option number/letter
-        """
+           Retrieves the user's option input.
+
+           Prompts the user to enter their option choice from the menu.
+
+           Returns:
+               str: The user's option input.
+       """
         return input('\nChoose an option from the menu: ')
 
     @staticmethod
     def list_all_veges(vegetables):
         """
-        prints out on the console a list of the first 100 records in the dataset,
-        and prints student name every 10 records
-        :return:
-        None
+        Lists all the vegetables in a table format, with a header row.
+
+
+        Args:
+            vegetables (list): A list of vegetables to display in the table.
+
+        Returns:
+            None
         """
-        #TODO: print the passed list in a table (like in project 1).
         header_row = ["ID", "REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
                       "SCALAR_FACTOR",
                       "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
@@ -61,10 +73,16 @@ class VegetablesView:
     @staticmethod
     def display_one_veg(vegetable):
         """
-        Prints out the details of the passed vegetableRecord object
-        :return:
+        Displays the details of a single vegetable.
+
+        This static method takes a single vegetable `vegetable` and displays its details in a tabular format.
+
+        Args:
+            vegetable (VegetablesRecord): The vegetable object to display its details.
+
+        Returns:
+            None
         """
-        # TODO: Get user input for the record id, get the record form a controller method then print it.
         veg_details = [
             ['ID', vegetable.veg_id],
             ['REF_DATE', vegetable.ref_date],
@@ -90,11 +108,14 @@ class VegetablesView:
     @staticmethod
     def add_vegetable():
         """
-        Interacts with the user to set values of one record to be added to the list of records in-memory.
-        :return: A list of vegetableRecord attributes values to be inserted/added.
+            Prompts the user to enter the values for each column of a vegetable record.
+
+            It iterates through each column in the `VegetablesView._vegetable_fields` list and asks the user to input a
+            value for that column. The entered values are stored in a list `record` and returned.
+
+            Returns:
+                list: A list containing the values for each column of the vegetable record.
         """
-        # TODO: Create an object and get inputs from the user for each record member then pass it to the controller to
-        #  insert it in-memory.
         record = []
 
         print("Please enter the values for each of the columns: ")
@@ -107,12 +128,19 @@ class VegetablesView:
     @staticmethod
     def update_vegetable(vegetable):
         """
-        Gets user inputs to update the vegetableRecord passed to the method.
-        :param vegetable: The VegetableRecord object to be updated
-        :return:
+        prompts the user to update the values of each column in a vegetable record.
+
+        It iterates through each column in the `VegetablesView._vegetable_fields` list and asks the user to input a new
+        value for that column. If the user provides a new value, it replaces the corresponding value in the
+        `old_vegetable_list`, otherwise, it keeps the original value. The updated values are stored in a new list
+        `new_vegetable_list` and returned.
+
+        Args:
+            vegetable (VegetablesRecord): The existing vegetable object to be updated.
+
+        Returns:
+            list: A list containing the updated values for each column of the vegetable record.
         """
-        # TODO: Get the id from the user, get the corresponding record from the controller, inputs from the user for
-        #  each record member then pass the record to the controller to update the record in-memory.
         old_vegetable_list = vegetable.to_list()
         old_vegetable_list.pop(0)  # removing the id
 
@@ -172,12 +200,17 @@ class VegetablesView:
 
         print(f"saving file as {file_name}\n")
 
-
     @staticmethod
     def user_input_veg_id_view():
         """
-        Asks the user for the id of the vegetable record
-        :return: The id of the vegetable record
+            Prompts the user to input a vegetable ID.
+
+            This static method prompts the user to enter the ID of a vegetable record.
+            It repeatedly asks for user input until a valid integer ID is provided.
+            If the user enters a non-numeric value, an error message is displayed, and the user is asked to input again.
+
+            Returns:
+                int: The user-input vegetable ID.
         """
         while True:
             try:
@@ -189,10 +222,17 @@ class VegetablesView:
     @staticmethod
     def is_repeat_operation(action: str) -> bool:
         """
-        Asks user if they wish to repeat the same operation they were using,
-        so they do not need to go to the menu again
-        :param action: The action being performed
-        :return: True if the user wants to repeat, False otherwise
+            Asks the user if they want to repeat a certain action.
+
+            Prompts the user with a message asking if they want to repeat a specific action. The action
+            is specified by the `action` parameter. The method returns True if the user wants to repeat the action
+            and False otherwise. It keeps asking for input until a valid response is provided.
+
+            Args:
+                action (str): The action for which the user is being prompted to repeat.
+
+            Returns:
+                bool: True if the user wants to repeat the action, False otherwise.
         """
         while True:
             response = input(f"Do you want to {action} another record? (y/n) ").strip().lower()
@@ -207,4 +247,10 @@ class VegetablesView:
 
     @staticmethod
     def display_student_name():
+        """
+        Displays the name of the student (Abdul Mazed) in a box.
+
+        Returns:
+            None
+        """
         print(tabulate([["Program created by Abdul Mazed"]], tablefmt="double_outline"))

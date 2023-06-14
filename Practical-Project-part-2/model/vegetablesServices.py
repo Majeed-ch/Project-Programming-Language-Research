@@ -23,7 +23,7 @@ class VegetablesServices:
 
             Returns:
                 bool: True if the file is successfully loaded, False otherwise.
-            """
+        """
         self.records.clear()
         VegetablesRecord._last_id = 0
 
@@ -83,34 +83,71 @@ class VegetablesServices:
 
     def get_all_vegetables(self):
         """
-        Retrieves all the records that was loaded form the file.
-        :return: List of VegetablesRecord objects
+        Returns all the vegetable records stored in the instance.
+
+        This method returns a list containing all the vegetable records stored in the instance's `records` attribute.
+        The `records` attribute is  a list containing instances of the VegetablesRecord class.
+
+        Args:
+            self: The current instance of the class.
+
+        Returns:
+            list: A list containing all the vegetable records.
         """
         return self.records
 
     def get_veg_by_id(self, veg_id):
         """
-        Retrieves one record from the list based on the passed id
-        :param veg_id: the id of the requested record
-        :return: VegetablesRecord object or None if not found
+            Retrieves one record from the instance's `records` list based on the passed id
+
+            This method searches for a vegetable record with the specified `veg_id` in the instance's `records`
+            list. If a match is found, the record is returned. If no match is found, None is returned.
+
+            Args:
+                self: The current instance of the class.
+                veg_id (int): The ID of the vegetable record to search for.
+
+            Returns:
+                VegetablesRecord / None: The vegetable record if found, None otherwise.
         """
-        return self._search_list(veg_id)
+        for record in self.records:
+            if record.veg_id == veg_id:
+                return record
+
+        return None
 
     def add_vegetable(self, record):
         """
-        Adds a new record to the list of vegetableRecords
-        :param record: A list of vegetableRecord attributes values
-        :return:
+            Adds a vegetable record to the instance's `records` list.
+
+            This method creates a new `VegetablesRecord` object by calling the class method `from_list()` and passing
+            the `record` argument. The created `vegetable_obj` is then appended to the `records` list of the instance.
+
+            Args:
+                self: The current instance of the class.
+                record (list): A list containing the attribute values for the vegetable record.
+
+            Returns:
+                None
         """
         vegetable_obj = VegetablesRecord.from_list(record)
         self.records.append(vegetable_obj)
 
-    def update_vegetable(self, old_record, new_record_list):
+    @staticmethod
+    def update_vegetable(old_record, new_record_list):
         """
-        Updates the list of records with the passed record
-        :param old_record: The vegetableRecord object that needs to be updated
-        :param new_record_list: The updated vegetableRecord object
-        :return:
+            Updates the attributes of an existing vegetable record.
+
+            This static method takes an existing `VegetablesRecord` object `old_record` and a list `new_record_list`
+            containing the updated attribute values. The method assigns each element of `new_record_list` to the
+            corresponding attribute of `old_record` to update its values.
+
+            Args:
+                old_record (VegetablesRecord): The existing vegetable record object to update.
+                new_record_list (list): A list containing the updated attribute values for the record.
+
+            Returns:
+                None
         """
         old_record.ref_date = new_record_list[0]
         old_record.geo = new_record_list[1]
@@ -143,15 +180,3 @@ class VegetablesServices:
             None
         """
         self.records.remove(vegetable)
-
-    def _search_list(self, veg_id):
-        """
-        Searches the list of records for the object with the id equals the passed id
-        :param veg_id: the id of the requested record
-        :return: VegetablesRecord object or None if not found
-        """
-        for record in self.records:
-            if record.veg_id == veg_id:
-                return record
-
-        return None
