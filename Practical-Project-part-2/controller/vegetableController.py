@@ -106,6 +106,7 @@ class VegetableController:
         Returns:
             None
         """
+        View.display_student_name()
         vegetables = []
         for record in self.service.records:
             vegetables.append(record.to_list())
@@ -125,6 +126,8 @@ class VegetableController:
             None
         """
         View.display_student_name()
+
+        print("\n### VIEW ONE VEGETABLE ###\n")
 
         id_from_user = View.user_input_veg_id_view()
         vegetable_obj = self.service.get_veg_by_id(id_from_user)
@@ -152,6 +155,7 @@ class VegetableController:
             None
         """
         View.display_student_name()
+        print("\n### ADD A VEGETABLE RECORD ###\n")
 
         vegetable_obj = View.add_vegetable()
         self.service.add_vegetable(vegetable_obj)
@@ -176,6 +180,7 @@ class VegetableController:
             None
         """
         View.display_student_name()
+        print("\n### UPDATE A VEGETABLE RECORD ###\n")
 
         id_from_user = View.user_input_veg_id_view()
         old_vegetable_obj = self.service.get_veg_by_id(id_from_user)
@@ -206,6 +211,7 @@ class VegetableController:
             None
         """
         View.display_student_name()
+        print("\n### DELETE A VEGETABLE RECORD ###\n")
 
         id_from_user = View.user_input_veg_id_view()
         vegetable_obj = self.service.get_veg_by_id(id_from_user)
@@ -239,6 +245,7 @@ class VegetableController:
             None
         """
         View.display_student_name()
+        print("\n### SAVE VEGETABLE RECORDS TO FILE ###\n")
 
         current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
         file_name = f"vegetable_records_{current_datetime}.csv"
