@@ -2,10 +2,24 @@ from tabulate import tabulate
 
 
 class VegetablesView:
-
-    _vegetable_fields = ["REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
-                         "SCALAR_FACTOR", "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL",
-                         "TERMINATED", "DECIMALS"]
+    _vegetable_fields = [
+        "REF_DATE",
+        "GEO",
+        "DGUID",
+        "Type of product",
+        "Type of storage",
+        "UOM",
+        "UOM_ID",
+        "SCALAR_FACTOR",
+        "SCALAR_ID",
+        "VECTOR",
+        "COORDINATE",
+        "VALUE",
+        "STATUS",
+        "SYMBOL",
+        "TERMINATED",
+        "DECIMALS",
+    ]
 
     @staticmethod
     def display_menu():
@@ -36,14 +50,14 @@ class VegetablesView:
     @staticmethod
     def get_option_input():
         """
-           Retrieves the user's option input.
+        Retrieves the user's option input.
 
-           Prompts the user to enter their option choice from the menu.
+        Prompts the user to enter their option choice from the menu.
 
-           Returns:
-               str: The user's option input.
-       """
-        return input('\nChoose an option from the menu: ')
+        Returns:
+            str: The user's option input.
+        """
+        return input("\nChoose an option from the menu: ")
 
     @staticmethod
     def list_all_veges(vegetables):
@@ -57,9 +71,25 @@ class VegetablesView:
         Returns:
             None
         """
-        header_row = ["ID", "REF_DATE", "GEO", "DGUID", "Type of product", "Type of storage", "UOM", "UOM_ID",
-                      "SCALAR_FACTOR",
-                      "SCALAR_ID", "VECTOR", "COORDINATE", "VALUE", "STATUS", "SYMBOL", "TERMINATED", "DECIMALS"]
+        header_row = [
+            "ID",
+            "REF_DATE",
+            "GEO",
+            "DGUID",
+            "Type of product",
+            "Type of storage",
+            "UOM",
+            "UOM_ID",
+            "SCALAR_FACTOR",
+            "SCALAR_ID",
+            "VECTOR",
+            "COORDINATE",
+            "VALUE",
+            "STATUS",
+            "SYMBOL",
+            "TERMINATED",
+            "DECIMALS",
+        ]
         # student_name = "By Abdul Mazed"
         # rows_with_name = []
 
@@ -85,37 +115,37 @@ class VegetablesView:
             None
         """
         veg_details = [
-            ['ID', vegetable.veg_id],
-            ['REF_DATE', vegetable.ref_date],
-            ['GEO', vegetable.geo],
-            ['DGUID', vegetable.dguid],
-            ['Type of product', vegetable.type_of_product],
-            ['Type of storage', vegetable.type_of_storage],
-            ['UOM', vegetable.uom],
-            ['UOM_ID', vegetable.uom_id],
-            ['SCALAR_FACTOR', vegetable.scalar_factor],
-            ['SCALAR_ID', vegetable.scalar_id],
-            ['VECTOR', vegetable.vector],
-            ['COORDINATE', vegetable.coordinate],
-            ['VALUE', vegetable.value],
-            ['STATUS', vegetable.status],
-            ['SYMBOL', vegetable.symbol],
-            ['TERMINATED', vegetable.terminated],
-            ['DECIMALS', vegetable.decimals]
+            ["ID", vegetable.veg_id],
+            ["REF_DATE", vegetable.ref_date],
+            ["GEO", vegetable.geo],
+            ["DGUID", vegetable.dguid],
+            ["Type of product", vegetable.type_of_product],
+            ["Type of storage", vegetable.type_of_storage],
+            ["UOM", vegetable.uom],
+            ["UOM_ID", vegetable.uom_id],
+            ["SCALAR_FACTOR", vegetable.scalar_factor],
+            ["SCALAR_ID", vegetable.scalar_id],
+            ["VECTOR", vegetable.vector],
+            ["COORDINATE", vegetable.coordinate],
+            ["VALUE", vegetable.value],
+            ["STATUS", vegetable.status],
+            ["SYMBOL", vegetable.symbol],
+            ["TERMINATED", vegetable.terminated],
+            ["DECIMALS", vegetable.decimals],
         ]
 
-        print(tabulate(veg_details, tablefmt='simple'))
+        print(tabulate(veg_details, tablefmt="simple"))
 
     @staticmethod
     def add_vegetable():
         """
-            Prompts the user to enter the values for each column of a vegetable record.
+        Prompts the user to enter the values for each column of a vegetable record.
 
-            It iterates through each column in the `VegetablesView._vegetable_fields` list and asks the user to input a
-            value for that column. The entered values are stored in a list `record` and returned.
+        It iterates through each column in the `VegetablesView._vegetable_fields` list and asks the user to input a
+        value for that column. The entered values are stored in a list `record` and returned.
 
-            Returns:
-                list: A list containing the values for each column of the vegetable record.
+        Returns:
+            list: A list containing the values for each column of the vegetable record.
         """
         record = []
 
@@ -147,12 +177,16 @@ class VegetablesView:
 
         new_vegetable_list = []
 
-        print("="*10)
-        print("Enter the value of each column to update it\n"
-              "Leave it empty if no need to update")
+        print("=" * 10)
+        print(
+            "Enter the value of each column to update it\n"
+            "Leave it empty if no need to update"
+        )
         print("=" * 10)
 
-        for column, old_value in zip(VegetablesView._vegetable_fields, old_vegetable_list):
+        for column, old_value in zip(
+            VegetablesView._vegetable_fields, old_vegetable_list
+        ):
             new_value = input(f"{column}: {old_value} <- ")
 
             if new_value:
@@ -175,10 +209,14 @@ class VegetablesView:
             bool: True if the user confirms deletion, False if cancellation is requested.
         """
         while True:
-            response = input("\nAre you sure want to delete this record? (y/n) ").strip().lower()
-            if response in ['yes', 'y']:
+            response = (
+                input("\nAre you sure want to delete this record? (y/n) ")
+                .strip()
+                .lower()
+            )
+            if response in ["yes", "y"]:
                 return True
-            elif response in ['no', 'n']:
+            elif response in ["no", "n"]:
                 print("\nCanceling...")
                 return False
             else:
@@ -204,43 +242,47 @@ class VegetablesView:
     @staticmethod
     def user_input_veg_id_view():
         """
-            Prompts the user to input a vegetable ID.
+        Prompts the user to input a vegetable ID.
 
-            This static method prompts the user to enter the ID of a vegetable record.
-            It repeatedly asks for user input until a valid integer ID is provided.
-            If the user enters a non-numeric value, an error message is displayed, and the user is asked to input again.
+        This static method prompts the user to enter the ID of a vegetable record.
+        It repeatedly asks for user input until a valid integer ID is provided.
+        If the user enters a non-numeric value, an error message is displayed, and the user is asked to input again.
 
-            Returns:
-                int: The user-input vegetable ID.
+        Returns:
+            int: The user-input vegetable ID.
         """
         while True:
             try:
                 input_veg_id = int(input("Please enter the ID of the record: "))
                 return input_veg_id
             except ValueError:
-                print("Invalid input. Please check your input, it should be a number.\n")
+                print(
+                    "Invalid input. Please check your input, it should be a number.\n"
+                )
 
     @staticmethod
     def is_repeat_operation(action: str) -> bool:
         """
-            Asks the user if they want to repeat a certain action.
+        Asks the user if they want to repeat a certain action.
 
-            Prompts the user with a message asking if they want to repeat a specific action. The action
-            is specified by the `action` parameter. The method returns True if the user wants to repeat the action
-            and False otherwise. It keeps asking for input until a valid response is provided.
+        Prompts the user with a message asking if they want to repeat a specific action. The action
+        is specified by the `action` parameter. The method returns True if the user wants to repeat the action
+        and False otherwise. It keeps asking for input until a valid response is provided.
 
-            Args:
-                action (str): The action for which the user is being prompted to repeat.
+        Args:
+            action (str): The action for which the user is being prompted to repeat.
 
-            Returns:
-                bool: True if the user wants to repeat the action, False otherwise.
+        Returns:
+            bool: True if the user wants to repeat the action, False otherwise.
         """
         while True:
-            response = input(f"Do you want to {action} another record? (y/n) ").strip().lower()
+            response = (
+                input(f"Do you want to {action} another record? (y/n) ").strip().lower()
+            )
             print(" ")
-            if response in ['yes', 'y']:
+            if response in ["yes", "y"]:
                 return True
-            elif response in ['no', 'n']:
+            elif response in ["no", "n"]:
                 return False
             else:
                 print("Invalid input. Please enter yes or no.")

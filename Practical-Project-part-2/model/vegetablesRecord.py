@@ -2,10 +2,28 @@ class VegetablesRecord:
     """
     A data transfer object for the Vegetables dataset 32100260
     """
+
     _last_id = 0
 
-    def __init__(self, ref_date, geo, dguid, type_of_product, type_of_storage, uom, uom_id, scalar_factor,
-                 scalar_id, vector, coordinate, value, status, symbol, terminated, decimals):
+    def __init__(
+        self,
+        ref_date,
+        geo,
+        dguid,
+        type_of_product,
+        type_of_storage,
+        uom,
+        uom_id,
+        scalar_factor,
+        scalar_id,
+        vector,
+        coordinate,
+        value,
+        status,
+        symbol,
+        terminated,
+        decimals,
+    ):
         """
         Initializes a new instance of the VegetablesRecord class.
 
@@ -78,9 +96,23 @@ class VegetablesRecord:
             list: A list representation of the VegetablesRecord object.
         """
         return [
-            self.veg_id, self.ref_date, self.geo, self.dguid, self.type_of_product, self.type_of_storage,
-            self.uom, self.uom_id, self.scalar_factor, self.scalar_id, self.vector,
-            self.coordinate, self.value, self.status, self.symbol, self.terminated, self.decimals
+            self.veg_id,
+            self.ref_date,
+            self.geo,
+            self.dguid,
+            self.type_of_product,
+            self.type_of_storage,
+            self.uom,
+            self.uom_id,
+            self.scalar_factor,
+            self.scalar_id,
+            self.vector,
+            self.coordinate,
+            self.value,
+            self.status,
+            self.symbol,
+            self.terminated,
+            self.decimals,
         ]
 
     def __str__(self):
@@ -93,10 +125,11 @@ class VegetablesRecord:
         Returns:
             str: A string representation of the VegetablesRecord object.
         """
-        return f"Id: {self.veg_id}, ref_date: {self.ref_date}, geo: {self.geo}, dguid: {self.dguid}, " \
-               f"type_of_product: {self.type_of_product}, type_of_storage: {self.type_of_storage}, " \
-               f"uom: {self.uom}, uom_id: {self.uom_id}, scalar_factor: {self.scalar_factor}, " \
-               f"scalar_id: {self.scalar_id}, vector: {self.vector}, coordinate: {self.coordinate}, " \
-               f"value: {self.value}, status: {self.status}, symbol: {self.symbol}, " \
-               f"terminated: {self.terminated}, decimals: {self.decimals}"
-
+        return (
+            f"Id: {self.veg_id}, ref_date: {self.ref_date}, geo: {self.geo}, dguid: {self.dguid}, "
+            f"type_of_product: {self.type_of_product}, type_of_storage: {self.type_of_storage}, "
+            f"uom: {self.uom}, uom_id: {self.uom_id}, scalar_factor: {self.scalar_factor}, "
+            f"scalar_id: {self.scalar_id}, vector: {self.vector}, coordinate: {self.coordinate}, "
+            f"value: {self.value}, status: {self.status}, symbol: {self.symbol}, "
+            f"terminated: {self.terminated}, decimals: {self.decimals}"
+        )

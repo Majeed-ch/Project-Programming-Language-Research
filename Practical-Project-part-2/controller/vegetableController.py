@@ -71,7 +71,7 @@ class VegetableController:
             View.display_menu()
 
             option = View.get_option_input()
-            os.system('cls')
+            os.system("cls")
 
             if option == self._ALL_VEGETABLES:
                 self.list_all_veges()
@@ -137,7 +137,7 @@ class VegetableController:
         else:
             print(f"Sorry I didn't find a record with id ({id_from_user})\n")
 
-        if View.is_repeat_operation('view'):
+        if View.is_repeat_operation("view"):
             self.display_one_veg()
         else:
             return
@@ -161,7 +161,7 @@ class VegetableController:
         self.service.add_vegetable(vegetable_obj)
         print("\nVegetable record added successfully.\n")
 
-        if View.is_repeat_operation('add'):
+        if View.is_repeat_operation("add"):
             self.add_vegetable()
         else:
             return
@@ -192,7 +192,7 @@ class VegetableController:
         else:
             print(f"Sorry, I didn't find a record with ID {id_from_user}.\n")
 
-        if View.is_repeat_operation('update'):
+        if View.is_repeat_operation("update"):
             self.update_vegetable()
         else:
             return
@@ -225,7 +225,7 @@ class VegetableController:
         else:
             print(f"Sorry I didn't find a record with id ({id_from_user})\n")
 
-        if View.is_repeat_operation('delete'):
+        if View.is_repeat_operation("delete"):
             self.delete_vegetable()
         else:
             return
@@ -269,7 +269,6 @@ class VegetableController:
         View.display_student_name()
 
         if self.service.load_data():
-            print('='*15)
+            print("=" * 15)
             print("Data reloaded successfully.")
-            print('=' * 15)
-
+            print("=" * 15)
