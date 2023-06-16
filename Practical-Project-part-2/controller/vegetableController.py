@@ -71,27 +71,21 @@ class VegetableController:
             View.display_menu()
 
             option = View.get_option_input()
+            os.system('cls')
 
             if option == self._ALL_VEGETABLES:
-                os.system('clear')
                 self.list_all_veges()
             elif option == self._ONE_VEGETABLE:
-                os.system('clear')
                 self.display_one_veg()
             elif option == self._ADD_VEGETABLE:
-                os.system('clear')
                 self.add_vegetable()
             elif option == self._UPDATE_VEGETABLE:
-                os.system('clear')
                 self.update_vegetable()
             elif option == self._DELETE_VEGETABLE:
-                os.system('clear')
                 self.delete_vegetable()
             elif option == self._EXTRACT_RECORDS:
-                os.system('clear')
                 self.save_to_file()
             elif option == self._RELOAD_RECORDS:
-                os.system('clear')
                 self.reload_file()
             elif option.upper() == self._EXIT:
                 print("Exiting the program.\n")
@@ -130,6 +124,8 @@ class VegetableController:
         Returns:
             None
         """
+        View.display_student_name()
+
         id_from_user = View.user_input_veg_id_view()
         vegetable_obj = self.service.get_veg_by_id(id_from_user)
 
@@ -155,6 +151,8 @@ class VegetableController:
         Returns:
             None
         """
+        View.display_student_name()
+
         vegetable_obj = View.add_vegetable()
         self.service.add_vegetable(vegetable_obj)
         print("\nVegetable record added successfully.\n")
@@ -177,6 +175,8 @@ class VegetableController:
         Returns:
             None
         """
+        View.display_student_name()
+
         id_from_user = View.user_input_veg_id_view()
         old_vegetable_obj = self.service.get_veg_by_id(id_from_user)
 
@@ -205,6 +205,8 @@ class VegetableController:
         Returns:
             None
         """
+        View.display_student_name()
+
         id_from_user = View.user_input_veg_id_view()
         vegetable_obj = self.service.get_veg_by_id(id_from_user)
 
@@ -236,6 +238,8 @@ class VegetableController:
         Returns:
             None
         """
+        View.display_student_name()
+
         current_datetime = datetime.datetime.now().strftime("%Y%m%d_%H%M")
         file_name = f"vegetable_records_{current_datetime}.csv"
 
@@ -255,6 +259,8 @@ class VegetableController:
         Returns:
             None
         """
+        View.display_student_name()
+
         if self.service.load_data():
             print('='*15)
             print("Data reloaded successfully.")
