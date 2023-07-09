@@ -1,5 +1,5 @@
 # CST8333-S23-Projects
-This repo includes all the projects and assignemnt for the course Programming Language Research CST8333.
+This repo includes all the practical projects for the course Programming Language Research CST8333.
 
 ## practical project part 1
 *due date May 21st 2023.*
@@ -27,3 +27,14 @@ This repo includes all the projects and assignemnt for the course Programming La
 	- Create a new record and store it in the simple data structure in memory.
 	- Select and edit a record held in the simple data structure in memory.
 	- Select and delete a record from the simple data structure in memory.
+
+## practical project part 3
+*due date July 23 2023.*
+
+Augment your project, developed via Practical Project Part 2, by utilizing one advanced language feature from the list below, using the examples as a guide.
+<br/>[List of the advanced features]
+
+The selected advanced feature is Database Connectivity.
+- Database Connectivity
+	- Create a database table with fields named after the column names, and use a database driver, to connect your program to a database. This can replace the reliance on the File-IO of the dataset. Your Create, Read, Update, and Delete options would then manipulate the database rather than the CSV file.
+	- Populate the database table with all the data from the dataset, using field names in the database table
