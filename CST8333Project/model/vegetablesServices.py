@@ -120,10 +120,7 @@ class VegetablesServices:
 
     def add_vegetable(self, record):
         """
-        Adds a vegetable record to the instance's `records` list.
-
-        This method creates a new `VegetablesRecord` object by calling the class method `from_list()` and passing
-        the `record` argument. The created `vegetable_obj` is then appended to the `records` list of the instance.
+        Adds a vegetable record to the DB Table `vegetable`.
 
         Args:
             self: The current instance of the class.
@@ -132,8 +129,11 @@ class VegetablesServices:
         Returns:
             None
         """
-        vegetable_obj = VegetablesRecord.from_iterable(record)
-        self.records.append(vegetable_obj)
+        with self.db_connection:
+            self.cursor.execute("INSERT INTO vegetable(ref_date, geo, dguid, type_of_product, type_of_storage,"
+                                " uom, uom_id, scalar_factor, scalar_id, vector, coordinate, value, status, symbol,"
+                                " terminated, decimals) "
+                                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", record)
 
     @staticmethod
     def update_vegetable(old_record, new_record_list):

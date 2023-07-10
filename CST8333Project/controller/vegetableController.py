@@ -144,7 +144,7 @@ class VegetableController:
 
     def add_vegetable(self):
         """
-        Adds a new vegetable record to the list of records.
+        Adds a new vegetable record to DB Table `vegetable`.
 
         This method prompts the user to enter the values for each column of the vegetable record using the `add_vegetable`
         method of the `View` class. The entered values are then passed to the `add_vegetable` method of the
@@ -157,8 +157,8 @@ class VegetableController:
         View.display_student_name()
         print("\n### ADD A VEGETABLE RECORD ###\n")
 
-        vegetable_obj = View.add_vegetable()
-        self.service.add_vegetable(vegetable_obj)
+        vegetable_list = View.add_vegetable()
+        self.service.add_vegetable(vegetable_list)
         print("\nVegetable record added successfully.\n")
 
         if View.is_repeat_operation("add"):

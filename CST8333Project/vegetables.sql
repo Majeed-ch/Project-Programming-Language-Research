@@ -13,11 +13,11 @@ CREATE TABLE vegetable (
     scalar_id TEXT,
     vector TEXT,
     coordinate TEXT,
-    value INTEGER,
+    value TEXT,
     status TEXT,
     symbol TEXT,
     terminated TEXT,
-    decimals REAL
+    decimals TEXT
 );
 
 -- Insert 100 records/rows of vegetables retrieved from the dataset file "32100260.csv
