@@ -28,8 +28,8 @@ class VegetablesServices:
             with open("vegetables.sql", "r") as file:
                 sql_script = file.read()
 
-            self.cursor.executescript(sql_script)
-            self.db_connection.commit()
+            with self.db_connection:
+                self.cursor.executescript(sql_script)
             return True
 
         except FileNotFoundError:
@@ -98,7 +98,9 @@ class VegetablesServices:
         Returns:
             list: A list containing all the vegetable records.
         """
-        return self.records
+
+        result = self.cursor.execute("SELECT * FROM vegetable;")
+        return result.fetchall()
 
     def get_veg_by_id(self, veg_id):
         """

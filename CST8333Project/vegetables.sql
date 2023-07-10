@@ -1,6 +1,7 @@
 -- create vegetable table with the dataset header as columns
 DROP TABLE IF EXISTS vegetable;
 CREATE TABLE vegetable (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     ref_date TEXT,
     geo TEXT,
     dguid TEXT,
@@ -16,8 +17,7 @@ CREATE TABLE vegetable (
     status TEXT,
     symbol TEXT,
     terminated TEXT,
-    decimals REAL,
-    id INTEGER PRIMARY KEY AUTOINCREMENT
+    decimals REAL
 );
 
 -- Insert 100 records/rows of vegetables retrieved from the dataset file "32100260.csv

@@ -90,6 +90,7 @@ class VegetableController:
             elif option.upper() == self._EXIT:
                 print("Exiting the program.\n")
                 View.display_student_name()
+                self.service.db_connection.close()
                 sleep(2)
                 sys.exit()
             else:
@@ -107,9 +108,8 @@ class VegetableController:
             None
         """
         View.display_student_name()
-        vegetables = []
-        for record in self.service.records:
-            vegetables.append(record.to_list())
+
+        vegetables = self.service.get_all_vegetables()
 
         View.list_all_veges(vegetables)
 
