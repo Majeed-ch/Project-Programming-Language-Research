@@ -23,6 +23,7 @@ class VegetablesRecord:
         symbol,
         terminated,
         decimals,
+        id
     ):
         """
         Initializes a new instance of the VegetablesRecord class.
@@ -52,6 +53,7 @@ class VegetablesRecord:
         self.symbol = symbol
         self.terminated = terminated
         self.decimals = decimals
+        self.id = id
 
     @classmethod
     def from_list(cls, data_list):

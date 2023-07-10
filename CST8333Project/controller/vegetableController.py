@@ -50,10 +50,10 @@ class VegetableController:
         """
 
         self.service = VegetablesServices(database_path)
-        # if not self.service.load_data():
-        #     print("Exiting program")
-        #     sleep(2)
-        #     sys.exit()
+        if not self.service.load_data():
+            print("Exiting program")
+            sleep(2)
+            sys.exit()
 
     def start(self):
         """

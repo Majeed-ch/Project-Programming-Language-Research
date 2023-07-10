@@ -1,5 +1,6 @@
 import csv
 import sqlite3
+from sqlite3 import DatabaseError
 
 from model.vegetablesRecord import VegetablesRecord
 
@@ -8,52 +9,37 @@ class VegetablesServices:
     def __init__(self, database_path: str):
         self.db_path = database_path
         self.db_connection = sqlite3.connect(database_path)
+        self.cursor = self.db_connection.cursor()
         self.records = []
 
     def load_data(self):
         """
-        Loads data from a file into the records list.
-
-        This method clears the current records list and resets the last ID of the `VegetablesRecord` class.
-        It then attempts to load data from the file specified by `self.file_path`. The file is read using the
-        `csv.reader` module, skipping the first row (header row) and parsing the next 100 rows as records.
-        Each row is converted into a `VegetablesRecord` object using the `from_list` method and added to the
-        records list. If the file is successfully loaded, the method returns True; otherwise, it returns False
-        and prints an appropriate error message.
+        Using the SQL script provided, it creates a vegetable table in the database and populates is with data.
 
         Args:
             self: The current instance of the class.
 
         Returns:
-            bool: True if the file is successfully loaded, False otherwise.
+            bool: True if the SQL file is successfully loaded, False otherwise.
         """
         self.records.clear()
-        VegetablesRecord._last_id = 0
 
         try:
-            with open(self.db_path, "r") as csv_file:
-                reader = csv.reader(csv_file)
+            with open("vegetables.sql", "r") as file:
+                sql_script = file.read()
 
-                # Skip the first row (header row)
-                next(reader)
-
-                # Parse the first 100 records in the file
-                rows_counter = 0
-                for row in reader:
-                    rows_counter += 1
-                    record = VegetablesRecord.from_list(row)
-                    self.records.append(record)
-                    if rows_counter == 100:
-                        break
-
-                return True
+            self.cursor.executescript(sql_script)
+            self.db_connection.commit()
+            return True
 
         except FileNotFoundError:
-            print(f"File {self.db_path} not found.")
+            print("File vegetables.sql not found.")
             return False
         except IOError:
-            print(f"Error reading file {self.db_path}.")
+            print("Error reading file vegetables.sql.")
             return False
+        except DatabaseError as ex:
+            print(f"Error happened working with the database: {ex}")
 
     def save_data(self, new_file_path):
         """
