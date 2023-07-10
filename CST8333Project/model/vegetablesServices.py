@@ -87,10 +87,7 @@ class VegetablesServices:
 
     def get_all_vegetables(self):
         """
-        Returns all the vegetable records stored in the instance.
-
-        This method returns a list containing all the vegetable records stored in the instance's `records` attribute.
-        The `records` attribute is  a list containing instances of the VegetablesRecord class.
+        Returns all the vegetable records stored in the DB Table `vegetable`.
 
         Args:
             self: The current instance of the class.
@@ -104,10 +101,7 @@ class VegetablesServices:
 
     def get_veg_by_id(self, veg_id):
         """
-        Retrieves one record from the instance's `records` list based on the passed id
-
-        This method searches for a vegetable record with the specified `veg_id` in the instance's `records`
-        list. If a match is found, the record is returned. If no match is found, None is returned.
+        Retrieves one record from the DB Table `vegetable` based on the passed id
 
         Args:
             self: The current instance of the class.
@@ -116,9 +110,11 @@ class VegetablesServices:
         Returns:
             VegetablesRecord / None: The vegetable record if found, None otherwise.
         """
-        for record in self.records:
-            if record.veg_id == veg_id:
-                return record
+        self.cursor.execute("SELECT * FROM vegetable WHERE id = :id;", {"id": veg_id})
+
+        row = self.cursor.fetchone()
+        if row:
+            return VegetablesRecord.from_iterable(row)
 
         return None
 
@@ -136,7 +132,7 @@ class VegetablesServices:
         Returns:
             None
         """
-        vegetable_obj = VegetablesRecord.from_list(record)
+        vegetable_obj = VegetablesRecord.from_iterable(record)
         self.records.append(vegetable_obj)
 
     @staticmethod

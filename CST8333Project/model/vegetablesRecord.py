@@ -52,13 +52,13 @@ class VegetablesRecord:
         self.decimals = decimals
 
     @classmethod
-    def from_list(cls, data_list):
+    def from_iterable(cls, iterable_data):
         """
-        Alternate constructor that creates a new instance of VegetablesRecord from a list of data.
+        Alternate constructor that creates a new instance of VegetablesRecord from an iterable data type like a list.
 
         Args:
             cls: The class object.
-            data_list (list): A list containing the attribute values for the record.
+            iterable_data: A iterable variable containing the attribute values for the record.
                 The list should follow the order of the attributes:
                 [ref_date, geo, dguid, type_of_product, type_of_storage, uom, uom_id,
                 scalar_factor, scalar_id, vector, coordinate, value, status, symbol,
@@ -67,7 +67,7 @@ class VegetablesRecord:
         Returns:
             VegetablesRecord: A new instance of the VegetablesRecord class.
         """
-        return cls(*data_list)
+        return cls(*iterable_data)
 
     @staticmethod
     def generate_id():
