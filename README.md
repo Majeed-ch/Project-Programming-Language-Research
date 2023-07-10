@@ -1,6 +1,12 @@
 # CST8333-S23-Projects
 This repo includes all the practical projects for the course Programming Language Research CST8333.
 
+### Dependencies
+For the project to run, you'll need to install its dependencies. 
+- From the project root folder "CST8333_S23", open the terminal or CMD
+- Run the following command `pip install -r requirements.txt`
+- This should download and install the required dependencies.
+
 ## practical project part 1
 *due date May 21st 2023.*
 
