@@ -35,25 +35,25 @@ class VegetableController:
     _RELOAD_RECORDS = "7"
     _EXIT = "X"
 
-    def __init__(self, file_path: str):
+    def __init__(self, database_path: str):
         """
         Initializes the VegetableController object.
 
         This method initializes the VegetableController object by creating an instance of the VegetablesServices
-        class and loading the data from the specified file. If the data cannot be loaded, the program will exit.
+        class and loading the data to the specified database. If the data cannot be loaded, the program will exit.
 
         Args:
-            file_path (str): The path to the file containing the vegetable records.
+            database_path (str): The path to the database file with .db extension used by SQLite.
 
         Returns:
             None
         """
 
-        self.service = VegetablesServices(file_path)
-        if not self.service.load_data():
-            print("Exiting program")
-            sleep(2)
-            sys.exit()
+        self.service = VegetablesServices(database_path)
+        # if not self.service.load_data():
+        #     print("Exiting program")
+        #     sleep(2)
+        #     sys.exit()
 
     def start(self):
         """

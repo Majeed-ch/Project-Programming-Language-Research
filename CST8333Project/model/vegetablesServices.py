@@ -1,10 +1,13 @@
 import csv
+import sqlite3
+
 from model.vegetablesRecord import VegetablesRecord
 
 
 class VegetablesServices:
-    def __init__(self, file_path: str):
-        self.file_path = file_path
+    def __init__(self, database_path: str):
+        self.db_path = database_path
+        self.db_connection = sqlite3.connect(database_path)
         self.records = []
 
     def load_data(self):
@@ -28,7 +31,7 @@ class VegetablesServices:
         VegetablesRecord._last_id = 0
 
         try:
-            with open(self.file_path, "r") as csv_file:
+            with open(self.db_path, "r") as csv_file:
                 reader = csv.reader(csv_file)
 
                 # Skip the first row (header row)
@@ -46,10 +49,10 @@ class VegetablesServices:
                 return True
 
         except FileNotFoundError:
-            print(f"File {self.file_path} not found.")
+            print(f"File {self.db_path} not found.")
             return False
         except IOError:
-            print(f"Error reading file {self.file_path}.")
+            print(f"Error reading file {self.db_path}.")
             return False
 
     def save_data(self, new_file_path):

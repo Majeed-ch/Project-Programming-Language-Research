@@ -11,8 +11,8 @@ def main():
     Returns:
         None
     """
-    file_path = "32100260.csv"
-    ctrl = VegetableController(file_path)
+    db_path = "CST8333_S23.db"
+    ctrl = VegetableController(db_path)
     ctrl.start()
 
 
