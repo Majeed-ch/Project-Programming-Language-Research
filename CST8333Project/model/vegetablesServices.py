@@ -11,7 +11,6 @@ class VegetablesServices:
         self.db_connection = sqlite3.connect(database_path)
         self.db_connection.row_factory = self.list_factory
         self.cursor = self.db_connection.cursor()
-        self.records = []
 
     def load_data(self):
         """
@@ -23,8 +22,6 @@ class VegetablesServices:
         Returns:
             bool: True if the SQL file is successfully loaded, False otherwise.
         """
-        self.records.clear()
-
         try:
             with open("vegetables.sql", "r") as file:
                 sql_script = file.read()
@@ -58,6 +55,7 @@ class VegetablesServices:
             None
         """
         field_names = [
+            "id",
             "ref_date",
             "geo",
             "dguid",
@@ -76,12 +74,14 @@ class VegetablesServices:
             "decimals",
         ]
 
+        records_list = self.cursor.execute("SELECT * FROM vegetable;").fetchall()
+
         try:
             with open(new_file_path, "w", newline="") as file:
                 writer = csv.writer(file)
                 writer.writerow(field_names)
-                for record in self.records:
-                    writer.writerow([getattr(record, field) for field in field_names])
+                for record in records_list:
+                    writer.writerow([record[field_names.index(field)] for field in field_names])
             print("Data saved successfully.\n")
         except Exception as e:
             print("Error occurred while saving data: \n", str(e))
