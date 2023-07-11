@@ -135,38 +135,23 @@ class VegetablesServices:
                                 " terminated, decimals) "
                                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", record)
 
-    @staticmethod
-    def update_vegetable(old_record, new_record_list):
+    def update_vegetable(self, new_record_list):
         """
-        Updates the attributes of an existing vegetable record.
-
-        This static method takes an existing `VegetablesRecord` object `old_record` and a list `new_record_list`
-        containing the updated attribute values. The method assigns each element of `new_record_list` to the
-        corresponding attribute of `old_record` to update its values.
+        Updates the attributes of an existing vegetable record in the database.
 
         Args:
-            old_record (VegetablesRecord): The existing vegetable record object to update.
-            new_record_list (list): A list containing the updated attribute values for the record.
+            self: The current instance of the class.
+            new_record_list (list): A list containing the updated attribute values for the record, and contains the
+            vegetable record id as the last element.
 
         Returns:
             None
         """
-        old_record.ref_date = new_record_list[0]
-        old_record.geo = new_record_list[1]
-        old_record.dguid = new_record_list[2]
-        old_record.type_of_product = new_record_list[3]
-        old_record.type_of_storage = new_record_list[4]
-        old_record.uom = new_record_list[5]
-        old_record.uom_id = new_record_list[6]
-        old_record.scalar_factor = new_record_list[7]
-        old_record.scalar_id = new_record_list[8]
-        old_record.vector = new_record_list[9]
-        old_record.coordinate = new_record_list[10]
-        old_record.value = new_record_list[11]
-        old_record.status = new_record_list[12]
-        old_record.symbol = new_record_list[13]
-        old_record.terminated = new_record_list[14]
-        old_record.decimals = new_record_list[15]
+        with self.db_connection:
+            self.cursor.execute("UPDATE vegetable SET ref_date=?, geo=?, dguid=?, type_of_product=?, type_of_storage=?,"
+                                "uom=?, uom_id=?, scalar_factor=?, scalar_id=?, vector=?, coordinate=?, value=?, "
+                                "status =?, symbol=?, terminated=?, decimals=?"
+                                "WHERE id = ?;", new_record_list)
 
     def delete_vegetable(self, vegetable):
         """

@@ -187,7 +187,7 @@ class VegetableController:
 
         if old_vegetable_obj:
             new_vegetable_obj_list = View.update_vegetable(old_vegetable_obj)
-            self.service.update_vegetable(old_vegetable_obj, new_vegetable_obj_list)
+            self.service.update_vegetable(new_vegetable_obj_list)
             print("\nVegetable record updated successfully.\n")
         else:
             print(f"Sorry, I didn't find a record with ID {id_from_user}.\n")

@@ -132,21 +132,17 @@ class VegetablesView:
     @staticmethod
     def update_vegetable(vegetable):
         """
-        prompts the user to update the values of each column in a vegetable record.
-
-        It iterates through each column in the `VegetablesView._vegetable_fields` list and asks the user to input a new
-        value for that column. If the user provides a new value, it replaces the corresponding value in the
-        `old_vegetable_list`, otherwise, it keeps the original value. The updated values are stored in a new list
-        `new_vegetable_list` and returned.
+        prompts the user to update the values of each column in a vegetable record, and appends the record ID to the end
+        of the list.
 
         Args:
             vegetable (VegetablesRecord): The existing vegetable object to be updated.
 
         Returns:
-            list: A list containing the updated values for each column of the vegetable record.
+            list: A list containing the updated values for each column of the vegetable record and its ID.
         """
         old_vegetable_list = vegetable.to_list()
-        old_vegetable_list.pop(0)  # removing the id
+        veg_id = old_vegetable_list.pop(0)  # removing the id
 
         new_vegetable_list = []
 
@@ -167,6 +163,7 @@ class VegetablesView:
             else:
                 new_vegetable_list.append(old_value)
 
+        new_vegetable_list.append(veg_id)  # adding the id to the end of the list
         return new_vegetable_list
 
     @staticmethod
