@@ -154,20 +154,19 @@ class VegetablesServices:
                                 "status =?, symbol=?, terminated=?, decimals=?"
                                 "WHERE id = ?;", new_record_list)
 
-    def delete_vegetable(self, vegetable):
+    def delete_vegetable(self, veg_id):
         """
         Removes a vegetable record from the list of records.
 
-        This method removes the specified `vegetable` from the `records` list.
-
         Args:
             self: The current instance of the class.
-            vegetable: The vegetable record to be deleted.
+            veg_id (int): The ID of the vegetable record to be deleted.
 
         Returns:
             None
         """
-        self.records.remove(vegetable)
+        with self.db_connection:
+            self.cursor.execute("DELETE FROM vegetable WHERE id = :vegetable_id", {"vegetable_id": veg_id})
 
     @staticmethod
     def list_factory(cursor, row):
