@@ -71,35 +71,8 @@ class VegetablesView:
         Returns:
             None
         """
-        header_row = [
-            "ID",
-            "REF_DATE",
-            "GEO",
-            "DGUID",
-            "Type of product",
-            "Type of storage",
-            "UOM",
-            "UOM_ID",
-            "SCALAR_FACTOR",
-            "SCALAR_ID",
-            "VECTOR",
-            "COORDINATE",
-            "VALUE",
-            "STATUS",
-            "SYMBOL",
-            "TERMINATED",
-            "DECIMALS",
-        ]
-        # student_name = "By Abdul Mazed"
-        # rows_with_name = []
 
-        print(tabulate(vegetables, headers=header_row, tablefmt="simple_outline"))
-        # for i, row in enumerate(vegetables, 1):
-        #     rows_with_name.append(row)
-        #     if i % 10 == 0:
-        #         rows_with_name.append([student_name])
-        #
-        # print(tabulate(rows_with_name, headers=header_row, tablefmt="simple_outline"))
+        print(tabulate(vegetables, headers=VegetablesView._vegetable_fields, tablefmt="simple_outline"))
 
     @staticmethod
     def display_one_veg(vegetable):
