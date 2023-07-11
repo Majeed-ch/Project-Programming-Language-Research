@@ -130,10 +130,10 @@ class VegetableController:
         print("\n### VIEW ONE VEGETABLE ###\n")
 
         id_from_user = View.user_input_veg_id_view()
-        vegetable_obj = self.service.get_veg_by_id(id_from_user)
+        vegetable_list = self.service.get_veg_by_id(id_from_user)
 
-        if vegetable_obj:
-            View.display_one_veg(vegetable_obj)
+        if vegetable_list:
+            View.display_one_veg(vegetable_list)
         else:
             print(f"Sorry I didn't find a record with id ({id_from_user})\n")
 

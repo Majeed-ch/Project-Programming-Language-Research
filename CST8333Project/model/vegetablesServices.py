@@ -9,6 +9,7 @@ class VegetablesServices:
     def __init__(self, database_path: str):
         self.db_path = database_path
         self.db_connection = sqlite3.connect(database_path)
+        self.db_connection.row_factory = self.list_factory
         self.cursor = self.db_connection.cursor()
         self.records = []
 
@@ -108,13 +109,13 @@ class VegetablesServices:
             veg_id (int): The ID of the vegetable record to search for.
 
         Returns:
-            VegetablesRecord / None: The vegetable record if found, None otherwise.
+            list / None: The vegetable record list if found, None otherwise.
         """
         self.cursor.execute("SELECT * FROM vegetable WHERE id = :id;", {"id": veg_id})
 
         row = self.cursor.fetchone()
         if row:
-            return VegetablesRecord.from_iterable(row)
+            return row
 
         return None
 
@@ -167,3 +168,20 @@ class VegetablesServices:
             None
         """
         self.records.remove(vegetable)
+
+    @staticmethod
+    def list_factory(cursor, row):
+        """
+        Custom row factory function that converts each row into a list.
+
+        This function is designed to be used as the row_factory for a SQLite connection or cursor object.
+        It takes two arguments: `cursor` and `row` which typically provided by the connection not the user.
+
+        Parameters:
+            cursor (sqlite3.Cursor): The SQLite cursor object.
+            row (tuple): A row retrieved from the database query result.
+
+        Returns:
+            list: The row converted into a list.
+        """
+        return list(row)
