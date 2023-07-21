@@ -22,8 +22,9 @@ class VegetablesServices:
         Returns:
             bool: True if the SQL file is successfully loaded, False otherwise.
         """
+        sql_file = "vegetables.sql"
         try:
-            with open("vegetables.sql", "r") as file:
+            with open(sql_file, "r") as file:
                 sql_script = file.read()
 
             with self.db_connection:
@@ -31,10 +32,10 @@ class VegetablesServices:
             return True
 
         except FileNotFoundError:
-            print("File vegetables.sql not found.")
+            print(f"File {sql_file} not found.")
             return False
         except IOError:
-            print("Error reading file vegetables.sql.")
+            print(f"Error reading file {sql_file}.")
             return False
         except DatabaseError as ex:
             print(f"Error happened working with the database: {ex}")
