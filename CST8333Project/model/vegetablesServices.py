@@ -2,13 +2,10 @@ import csv
 import sqlite3
 from sqlite3 import DatabaseError
 
-from model.vegetablesRecord import VegetablesRecord
-
 
 class VegetablesServices:
-    def __init__(self, database_path: str):
-        self.db_path = database_path
-        self.db_connection = sqlite3.connect(database_path)
+    def __init__(self, database_name: str):
+        self.db_connection = sqlite3.connect(database_name)
         self.db_connection.row_factory = self.list_factory
         self.cursor = self.db_connection.cursor()
 

@@ -51,68 +51,6 @@ class VegetablesRecord:
         self.terminated = terminated
         self.decimals = decimals
 
-    @classmethod
-    def from_iterable(cls, iterable_data):
-        """
-        Alternate constructor that creates a new instance of VegetablesRecord from an iterable data type like a list.
-
-        Args:
-            cls: The class object.
-            iterable_data: A iterable variable containing the attribute values for the record.
-                The list should follow the order of the attributes:
-                [ref_date, geo, dguid, type_of_product, type_of_storage, uom, uom_id,
-                scalar_factor, scalar_id, vector, coordinate, value, status, symbol,
-                terminated, decimals]
-
-        Returns:
-            VegetablesRecord: A new instance of the VegetablesRecord class.
-        """
-        return cls(*iterable_data)
-
-    @staticmethod
-    def generate_id():
-        """
-        Generates an incremental id for a VegetableRecord instance
-
-        This static method increments the `_last_id` class variable of the VegetablesRecord class by 1,
-        and returns the updated value as the generated ID.
-
-        Returns:
-            int: The generated ID for a VegetablesRecord instance.
-        """
-        VegetablesRecord._last_id += 1
-        return VegetablesRecord._last_id
-
-    def to_list(self):
-        """
-        Converts a VegetablesRecord object to a list.
-
-        Args:
-            self: The current instance of the class.
-
-        Returns:
-            list: A list representation of the VegetablesRecord object.
-        """
-        return [
-            self.veg_id,
-            self.ref_date,
-            self.geo,
-            self.dguid,
-            self.type_of_product,
-            self.type_of_storage,
-            self.uom,
-            self.uom_id,
-            self.scalar_factor,
-            self.scalar_id,
-            self.vector,
-            self.coordinate,
-            self.value,
-            self.status,
-            self.symbol,
-            self.terminated,
-            self.decimals,
-        ]
-
     def __str__(self):
         """
         Returns a string representation of the VegetablesRecord object.

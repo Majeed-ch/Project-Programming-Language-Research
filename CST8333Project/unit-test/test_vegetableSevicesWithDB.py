@@ -1,9 +1,9 @@
-import os
 import unittest
 import sqlite3
 from model.vegetablesServices import VegetablesServices
 
 
+# By Abdul Mazed
 class TestVegetablesServices(unittest.TestCase):
     def setUp(self):
         """Create a test database and table before running each test"""
@@ -38,10 +38,10 @@ class TestVegetablesServices(unittest.TestCase):
         """)
         self.db.commit()
 
+    # By Abdul Mazed
     def tearDown(self):
         """Close the database connection after running each test"""
         self.db.close()
-        # os.remove("test_database.db")
 
     def test_get_veg_by_id(self):
         """Test that get_veg_by_id retrieves the correct record"""
