@@ -71,70 +71,27 @@ class VegetablesView:
         Returns:
             None
         """
-        header_row = [
-            "ID",
-            "REF_DATE",
-            "GEO",
-            "DGUID",
-            "Type of product",
-            "Type of storage",
-            "UOM",
-            "UOM_ID",
-            "SCALAR_FACTOR",
-            "SCALAR_ID",
-            "VECTOR",
-            "COORDINATE",
-            "VALUE",
-            "STATUS",
-            "SYMBOL",
-            "TERMINATED",
-            "DECIMALS",
-        ]
-        # student_name = "By Abdul Mazed"
-        # rows_with_name = []
 
-        print(tabulate(vegetables, headers=header_row, tablefmt="simple_outline"))
-        # for i, row in enumerate(vegetables, 1):
-        #     rows_with_name.append(row)
-        #     if i % 10 == 0:
-        #         rows_with_name.append([student_name])
-        #
-        # print(tabulate(rows_with_name, headers=header_row, tablefmt="simple_outline"))
+        print(tabulate(vegetables, headers=VegetablesView._vegetable_fields, tablefmt="simple_outline"))
 
     @staticmethod
     def display_one_veg(vegetable):
         """
         Displays the details of a single vegetable.
 
-        This static method takes a single vegetable `vegetable` and displays its details in a tabular format.
+        This static method takes a single vegetable record list and displays its details in a tabular format.
 
         Args:
-            vegetable (VegetablesRecord): The vegetable object to display its details.
+            vegetable (list): The vegetable object to display its details.
 
         Returns:
             None
         """
-        veg_details = [
-            ["ID", vegetable.veg_id],
-            ["REF_DATE", vegetable.ref_date],
-            ["GEO", vegetable.geo],
-            ["DGUID", vegetable.dguid],
-            ["Type of product", vegetable.type_of_product],
-            ["Type of storage", vegetable.type_of_storage],
-            ["UOM", vegetable.uom],
-            ["UOM_ID", vegetable.uom_id],
-            ["SCALAR_FACTOR", vegetable.scalar_factor],
-            ["SCALAR_ID", vegetable.scalar_id],
-            ["VECTOR", vegetable.vector],
-            ["COORDINATE", vegetable.coordinate],
-            ["VALUE", vegetable.value],
-            ["STATUS", vegetable.status],
-            ["SYMBOL", vegetable.symbol],
-            ["TERMINATED", vegetable.terminated],
-            ["DECIMALS", vegetable.decimals],
-        ]
+        vegetable.pop(0)  # remove the ID
+        # combine the header list with the vegetable list in one list to be used with tabulate
+        table_data = [[header, value] for header, value in zip(VegetablesView._vegetable_fields, vegetable)]
 
-        print(tabulate(veg_details, tablefmt="simple"))
+        print(tabulate(table_data, tablefmt="simple"))
 
     @staticmethod
     def add_vegetable():
@@ -157,25 +114,20 @@ class VegetablesView:
         return record
 
     @staticmethod
-    def update_vegetable(vegetable):
+    def update_vegetable(old_vegetable):
         """
-        prompts the user to update the values of each column in a vegetable record.
-
-        It iterates through each column in the `VegetablesView._vegetable_fields` list and asks the user to input a new
-        value for that column. If the user provides a new value, it replaces the corresponding value in the
-        `old_vegetable_list`, otherwise, it keeps the original value. The updated values are stored in a new list
-        `new_vegetable_list` and returned.
+        prompts the user to update the values of each column in a vegetable record, and appends the record ID to the end
+        of the list.
 
         Args:
-            vegetable (VegetablesRecord): The existing vegetable object to be updated.
+            old_vegetable (list): The existing vegetable record to be updated.
 
         Returns:
-            list: A list containing the updated values for each column of the vegetable record.
+            list: A list containing the updated values for each column of the vegetable record and its ID.
         """
-        old_vegetable_list = vegetable.to_list()
-        old_vegetable_list.pop(0)  # removing the id
+        veg_id = old_vegetable.pop(0)  # removing the id
 
-        new_vegetable_list = []
+        new_vegetable = []
 
         print("=" * 10)
         print(
@@ -185,16 +137,17 @@ class VegetablesView:
         print("=" * 10)
 
         for column, old_value in zip(
-            VegetablesView._vegetable_fields, old_vegetable_list
+            VegetablesView._vegetable_fields, old_vegetable
         ):
             new_value = input(f"{column}: {old_value} <- ")
 
             if new_value:
-                new_vegetable_list.append(new_value)
+                new_vegetable.append(new_value)
             else:
-                new_vegetable_list.append(old_value)
+                new_vegetable.append(old_value)
 
-        return new_vegetable_list
+        new_vegetable.append(veg_id)  # adding the id to the end of the list
+        return new_vegetable
 
     @staticmethod
     def delete_vegetable():

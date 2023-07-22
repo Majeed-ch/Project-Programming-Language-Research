@@ -35,21 +35,21 @@ class VegetableController:
     _RELOAD_RECORDS = "7"
     _EXIT = "X"
 
-    def __init__(self, file_path: str):
+    def __init__(self, database_path: str):
         """
         Initializes the VegetableController object.
 
         This method initializes the VegetableController object by creating an instance of the VegetablesServices
-        class and loading the data from the specified file. If the data cannot be loaded, the program will exit.
+        class and loading the data to the specified database. If the data cannot be loaded, the program will exit.
 
         Args:
-            file_path (str): The path to the file containing the vegetable records.
+            database_path (str): The path to the database file with .db extension used by SQLite.
 
         Returns:
             None
         """
 
-        self.service = VegetablesServices(file_path)
+        self.service = VegetablesServices(database_path)
         if not self.service.load_data():
             print("Exiting program")
             sleep(2)
@@ -90,6 +90,7 @@ class VegetableController:
             elif option.upper() == self._EXIT:
                 print("Exiting the program.\n")
                 View.display_student_name()
+                self.service.db_connection.close()
                 sleep(2)
                 sys.exit()
             else:
@@ -107,9 +108,8 @@ class VegetableController:
             None
         """
         View.display_student_name()
-        vegetables = []
-        for record in self.service.records:
-            vegetables.append(record.to_list())
+
+        vegetables = self.service.get_all_vegetables()
 
         View.list_all_veges(vegetables)
 
@@ -130,10 +130,10 @@ class VegetableController:
         print("\n### VIEW ONE VEGETABLE ###\n")
 
         id_from_user = View.user_input_veg_id_view()
-        vegetable_obj = self.service.get_veg_by_id(id_from_user)
+        vegetable_list = self.service.get_veg_by_id(id_from_user)
 
-        if vegetable_obj:
-            View.display_one_veg(vegetable_obj)
+        if vegetable_list:
+            View.display_one_veg(vegetable_list)
         else:
             print(f"Sorry I didn't find a record with id ({id_from_user})\n")
 
@@ -144,7 +144,7 @@ class VegetableController:
 
     def add_vegetable(self):
         """
-        Adds a new vegetable record to the list of records.
+        Adds a new vegetable record to DB Table `vegetable`.
 
         This method prompts the user to enter the values for each column of the vegetable record using the `add_vegetable`
         method of the `View` class. The entered values are then passed to the `add_vegetable` method of the
@@ -157,8 +157,8 @@ class VegetableController:
         View.display_student_name()
         print("\n### ADD A VEGETABLE RECORD ###\n")
 
-        vegetable_obj = View.add_vegetable()
-        self.service.add_vegetable(vegetable_obj)
+        vegetable_list = View.add_vegetable()
+        self.service.add_vegetable(vegetable_list)
         print("\nVegetable record added successfully.\n")
 
         if View.is_repeat_operation("add"):
@@ -187,7 +187,7 @@ class VegetableController:
 
         if old_vegetable_obj:
             new_vegetable_obj_list = View.update_vegetable(old_vegetable_obj)
-            self.service.update_vegetable(old_vegetable_obj, new_vegetable_obj_list)
+            self.service.update_vegetable(new_vegetable_obj_list)
             print("\nVegetable record updated successfully.\n")
         else:
             print(f"Sorry, I didn't find a record with ID {id_from_user}.\n")
@@ -214,13 +214,13 @@ class VegetableController:
         print("\n### DELETE A VEGETABLE RECORD ###\n")
 
         id_from_user = View.user_input_veg_id_view()
-        vegetable_obj = self.service.get_veg_by_id(id_from_user)
+        vegetable_list = self.service.get_veg_by_id(id_from_user)
 
-        if vegetable_obj:
-            View.display_one_veg(vegetable_obj)
+        if vegetable_list:
+            View.display_one_veg(vegetable_list)
             is_delete = View.delete_vegetable()
             if is_delete:
-                self.service.delete_vegetable(vegetable_obj)
+                self.service.delete_vegetable(id_from_user)
                 print("\nThe record is deleted successfully.\n")
         else:
             print(f"Sorry I didn't find a record with id ({id_from_user})\n")

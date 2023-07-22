@@ -8,3 +8,5 @@ __pycache__
 .idea
 .vscode
 venv
+*.db
+CST8333Project/extract_data_to_sql_insert.py
