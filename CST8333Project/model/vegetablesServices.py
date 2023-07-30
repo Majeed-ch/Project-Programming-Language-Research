@@ -166,6 +166,15 @@ class VegetablesServices:
         with self.db_connection:
             self.cursor.execute("DELETE FROM vegetable WHERE id = :vegetable_id", {"vegetable_id": veg_id})
 
+    def get_all_vegetables_sorted(self, sort_columns, sort_order):
+        if sort_columns:
+            columns_string = f" {sort_order}, ".join(sort_columns)
+            result = self.cursor.execute(f"SELECT * FROM vegetable ORDER BY {columns_string} {sort_order};")
+        else:
+            result = self.cursor.execute("SELECT * FROM vegetable;")
+
+        return result.fetchall()
+
     @staticmethod
     def list_factory(cursor, row):
         """

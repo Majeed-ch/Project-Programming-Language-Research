@@ -2,24 +2,9 @@ from tabulate import tabulate
 
 
 class VegetablesView:
-    _vegetable_fields = [
-        "REF_DATE",
-        "GEO",
-        "DGUID",
-        "Type of product",
-        "Type of storage",
-        "UOM",
-        "UOM_ID",
-        "SCALAR_FACTOR",
-        "SCALAR_ID",
-        "VECTOR",
-        "COORDINATE",
-        "VALUE",
-        "STATUS",
-        "SYMBOL",
-        "TERMINATED",
-        "DECIMALS",
-    ]
+    _vegetable_fields = ['ref_date', 'geo', 'dguid', 'type_of_product', 'type_of_storage', 'uom', 'uom_id',
+                         'scalar_factor', 'scalar_id', 'vector', 'coordinate', 'value', 'status', 'symbol',
+                         'terminated', 'decimals']
 
     @staticmethod
     def display_menu():
@@ -42,6 +27,7 @@ class VegetablesView:
             ["(5)", "Delete vegetable"],
             ["(6)", "Extract records to a file"],
             ["(7)", "Reload data from file"],
+            ["(8)", "View all vegetables sorted [*NEW]"],
             ["(X)", "Exit"],
         ]
 
@@ -191,6 +177,22 @@ class VegetablesView:
         """
 
         print(f"saving file as {file_name}\n")
+
+    @staticmethod
+    def get_sorting_selection():
+        print(f"columns: {VegetablesView._vegetable_fields.__str__().strip('[]')}")
+
+        print("Select columns to sort by (comma-separated, e.g.\" ref_date, geo \"): ")
+        sort_columns = input().strip().lower().split(',')
+        # Validate user input for sort columns, keep only the valid column names
+        sort_columns = [col.strip() for col in sort_columns if col.strip() in VegetablesView._vegetable_fields]
+
+        valid_order = ["asc", "desc"]
+        sort_order = input("Select sort order (asc/desc): ").strip().lower()
+        # Validate user input for sort order, default is asc order
+        sort_order = sort_order if sort_order in valid_order else "asc"
+
+        return [sort_columns, sort_order]
 
     @staticmethod
     def user_input_veg_id_view():
