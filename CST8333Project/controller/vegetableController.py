@@ -278,7 +278,7 @@ class VegetableController:
 
     def list_all_sorted(self):
         View.display_student_name()
-        print("\n### VIEW VEGETABLES SORTED ###\n")
+        print("\n### SORT VEGETABLES BY COLUMNS ###\n")
         sorting_by = View.get_sorting_selection()
 
         sorted_vegetables = self.service.get_all_vegetables_sorted(sorting_by[0], sorting_by[1])
