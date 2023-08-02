@@ -1,5 +1,6 @@
-# CST8333-S23-Projects
-This repo includes all the practical projects for the course Programming Language Research CST8333.
+# CST8333-S23-Project
+This repo includes the practical projects for the course Programming Language Research CST8333.
+The language used is Python with SQLite database.
 
 ### Dependencies
 For the project to run, you'll need to install its dependencies. 
@@ -44,3 +45,17 @@ The selected advanced feature is Database Connectivity.
 - Database Connectivity
 	- Create a database table with fields named after the column names, and use a database driver, to connect your program to a database. This can replace the reliance on the File-IO of the dataset. Your Create, Read, Update, and Delete options would then manipulate the database rather than the CSV file.
 	- Populate the database table with all the data from the dataset, using field names in the database table
+
+## practical project part 4
+*due date August 06 2023.*
+
+Modify your project to add additional functionality by utilizing the data set data to offer a new project feature to the user, Choose one of
+- Horizontal Bar Chart
+- Vertical Bar Chart
+- Pie Chart
+- Search records based on multiple columns at same time
+- Sort records based on multiple columns at same time, in a selected order (*Selected)
+
+The user must be able to interact with the program at run time to customize the output, for example what parts of the data to chart or perform a search or sort on.
+
+
