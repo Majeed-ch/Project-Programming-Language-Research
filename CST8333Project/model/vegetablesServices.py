@@ -166,6 +166,28 @@ class VegetablesServices:
         with self.db_connection:
             self.cursor.execute("DELETE FROM vegetable WHERE id = :vegetable_id", {"vegetable_id": veg_id})
 
+    def get_all_vegetables_sorted(self, sort_columns, sort_order):
+        """
+        Retrieves all records from the 'vegetable' table in the database and sorts them based on the specified columns and order.
+
+        Args:
+            sort_columns (list of str): The names of the columns to sort by. If this is an empty list, the records will be
+                returned in their natural order in the table.
+            sort_order (str): The sorting order. Should be 'ASC' for ascending or 'DESC' for descending.
+
+        Returns:
+            list: The sorted records from the 'vegetable' table.
+        Raises:
+            sqlite3.OperationalError: If there is a problem with the SQL syntax, such as a column name that doesn't exist.
+        """
+        if sort_columns:
+            columns_string = f" {sort_order}, ".join(sort_columns)
+            result = self.cursor.execute(f"SELECT * FROM vegetable ORDER BY {columns_string} {sort_order};")
+        else:
+            result = self.cursor.execute("SELECT * FROM vegetable;")
+
+        return result.fetchall()
+
     @staticmethod
     def list_factory(cursor, row):
         """

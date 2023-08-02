@@ -33,6 +33,7 @@ class VegetableController:
     _DELETE_VEGETABLE = "5"
     _EXTRACT_RECORDS = "6"
     _RELOAD_RECORDS = "7"
+    _VIEW_SORTED = "8"
     _EXIT = "X"
 
     def __init__(self, database_path: str):
@@ -87,6 +88,8 @@ class VegetableController:
                 self.save_to_file()
             elif option == self._RELOAD_RECORDS:
                 self.reload_file()
+            elif option == self._VIEW_SORTED:
+                self.list_all_sorted()
             elif option.upper() == self._EXIT:
                 print("Exiting the program.\n")
                 View.display_student_name()
@@ -272,3 +275,22 @@ class VegetableController:
             print("=" * 15)
             print("Data reloaded successfully.")
             print("=" * 15)
+
+    def list_all_sorted(self):
+        """
+        Prints the list of all vegetables from the database, sorted based on the user's selection.
+
+        Args:
+            self: The current instance of the class.
+
+        Returns:
+            None
+        """
+        View.display_student_name()
+        print("\n### SORT VEGETABLES BY COLUMNS ###\n")
+        sorting_by = View.get_sorting_selection()
+
+        sorted_vegetables = self.service.get_all_vegetables_sorted(sorting_by[0], sorting_by[1])
+
+        View.list_all_veges(sorted_vegetables)
+
