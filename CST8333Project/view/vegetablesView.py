@@ -180,6 +180,17 @@ class VegetablesView:
 
     @staticmethod
     def get_sorting_selection():
+        """
+        Interacts with the user to get their selection for how to sort a list of vegetables.
+
+        Returns:
+            list: A list where the first element is a list of the names of the columns to sort by and the second element is
+                the sorting order. The list of column names can be empty.
+
+        Note:
+            This method relies on the '_vegetable_fields' attribute of the 'VegetablesView' class. This attribute should be
+            a list of the names of the columns in the 'vegetable' table.
+        """
         print(f"columns: {VegetablesView._vegetable_fields.__str__().strip('[]')}")
 
         print("Select columns to sort by (comma-separated, e.g.\" ref_date, geo \"): ")

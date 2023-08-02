@@ -277,6 +277,15 @@ class VegetableController:
             print("=" * 15)
 
     def list_all_sorted(self):
+        """
+        Prints the list of all vegetables from the database, sorted based on the user's selection.
+
+        Args:
+            self: The current instance of the class.
+
+        Returns:
+            None
+        """
         View.display_student_name()
         print("\n### SORT VEGETABLES BY COLUMNS ###\n")
         sorting_by = View.get_sorting_selection()
